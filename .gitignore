@@ -1,0 +1,9 @@
+node_modules
+node_modules/*
+.vscode/
+web.config
+
+themes/
+public/
+private/
+resources

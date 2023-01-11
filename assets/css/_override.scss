@@ -1,0 +1,15 @@
+// ==============================
+// Override Variables
+// 覆盖变量
+// ==============================
+@import "theme/dark.scss";
+@import "transition.scss";
+@import "icon-cc.scss";
+
+code {
+    border-radius: 6px;
+}
+
+svg {
+    fill: currentColor;
+}

@@ -1,0 +1,38 @@
+# Translations for English
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === partials/footer.html ===
+[poweredBy]
+other = "Powered by <span id='footer-engine'>{{ .Hugo }}</span>"
+
+[hostedOn]
+other = "Hosted on {{ .Host }}"
+
+[theme]
+other = "Theme - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === Post ===
+[posts]
+other = "Posts"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "All {{ .Some }}"
+
+[tag]
+other = "Tag"
+
+[tags]
+other = "Tags"
+
+[category]
+other = "Category"
+
+[categories]
+other = "Categories"
+
+[series]
+other = "Series"
+# === Taxonomy ===

@@ -1,0 +1,109 @@
+$global-font-color-dark: #e9ebfc;
+$global-font-secondary-color-dark: #d5d7e2;
+$global-link-color-dark: #e9ebfc;
+$global-link-hover-color-dark: #fff;
+$global-border-color-dark: #344b78;
+$global-background-color-dark: #2e303e;
+
+$single-link-color-dark: #55bde2;
+$single-link-hover-color-dark: #bdebfc;
+
+$header-background-color-dark: #262731;
+$header-hover-color-dark: #fff;
+
+$pagination-link-color-dark: #a9a9b3;
+$pagination-link-hover-color-dark: #fff;
+
+$friend-link-background-color-dark: #23252f;
+$friend-link-color-dark: #e9ebfc;
+$friend-link-hover-color-dark: #ffffff;
+
+$selection-color-dark: rgba(50, 112, 194, 0.4);
+$search-background-color-dark: #344b78;
+
+$sponsor-button-background-color-dark: #344b78;
+$sponsor-button-hover-background-color-dark: #344b78;
+
+$table-background-color-dark: #21222c;
+$table-thead-color-dark: #20252b;
+
+$blockquote-color-dark: #59c5ec;
+
+$code-color-dark: #e5bf78;
+$code-background-color-dark: #21222c;
+$code-info-color-dark: #b1b0b0;
+$code-highlight-color-map-dark: (
+    /* Parentheses */ "p": #a9a9b3,
+    /* Keyword */ "k": #d371e3,
+    /* KeywordConstant */ "kc": #d371e3,
+    /* KeywordDeclaration */ "kd": #d371e3,
+    /* KeywordNamespace */ "kn": #d371e3,
+    /* KeywordPseudo */ "kp": #d371e3,
+    /* KeywordReserved */ "kr": #d371e3,
+    /* KeywordType */ "kt": #d371e3,
+    /* Name */ "n": #a9b2c0,
+    /* NameAttribute */ "na": #41b0f5,
+    /* NameBuiltin */ "nb": #19b9c4,
+    /* NameBuiltinPseudo */ "bp": #ecbf6f,
+    /* NameClass */ "nc": #ecbf6f,
+    /* NameConstant */ "no": #41b0f5,
+    /* NameDecorator */ "nd": #ecbf6f,
+    /* NameEntity */ "ni": #41b0f5,
+    /* NameException */ "ne": #41b0f5,
+    /* NameFunction */ "nf": #41b0f5,
+    /* NameFunctionMagic */ "fm": #19b9c4,
+    /* NameLabel */ "nl": #41b0f5,
+    /* NameNamespace */ "nn": #41b0f5,
+    /* NameOther */ "nx": #a9a9b3,
+    /* NameProperty */ "py": #41b0f5,
+    /* NameTag */ "nt": #41b0f5,
+    /* NameVariable */ "nv": #41b0f5,
+    /* NameVariableClass */ "vc": #41b0f5,
+    /* NameVariableGlobal */ "vg": #41b0f5,
+    /* NameVariableInstance */ "vi": #41b0f5,
+    /* NameVariableMagic */ "vm": #41b0f5,
+    /* Literal */ "l": #2aa198,
+    /* LiteralDate */ "ld": #2aa198,
+    /* LiteralString */ "s": #8cc570,
+    /* LiteralStringAffix */ "sa": #8cc570,
+    /* LiteralStringBacktick */ "sb": #8cc570,
+    /* LiteralStringChar */ "sc": #8cc570,
+    /* LiteralStringDelimiter */ "dl": #8cc570,
+    /* LiteralStringDoc */ "sd": #8cc570,
+    /* LiteralStringDouble */ "s2": #8cc570,
+    /* LiteralStringEscape */ "se": #8cc570,
+    /* LiteralStringHeredoc */ "sh": #8cc570,
+    /* LiteralStringInterpol */ "si": #8cc570,
+    /* LiteralStringOther */ "sx": #8cc570,
+    /* LiteralStringRegex */ "sr": #8cc570,
+    /* LiteralStringSingle */ "s1": #8cc570,
+    /* LiteralStringSymbol */ "ss": #8cc570,
+    /* LiteralNumber */ "m": #db985c,
+    /* LiteralNumberBin */ "mb": #db985c,
+    /* LiteralNumberFloat */ "mf": #db985c,
+    /* LiteralNumberHex */ "mh": #db985c,
+    /* LiteralNumberInteger */ "mi": #db985c,
+    /* LiteralNumberIntegerLong */ "il": #db985c,
+    /* LiteralNumberOct */ "mo": #db985c,
+    /* Operator */ "o": #ecbf6f,
+    /* OperatorWord */ "ow": #d371e3,
+    /* Comment */ "c": #7e848f,
+    /* CommentHashbang */ "ch": #7e848f,
+    /* CommentMultiline */ "cm": #7e848f,
+    /* CommentSingle */ "c1": #7e848f,
+    /* CommentSpecial */ "cs": #7e848f,
+    /* CommentPreproc */ "cp": #7e848f,
+    /* CommentPreprocFile */ "cpf": #7e848f,
+    /* Generic */ "g": #f16372,
+    /* GenericDeleted */ "gd": #f16372,
+    /* GenericEmph */ "ge": #f16372,
+    /* GenericError */ "gr": #f16372,
+    /* GenericHeading */ "gh": #f16372,
+    /* GenericInserted */ "gi": #f16372,
+    /* GenericOutput */ "go": #f16372,
+    /* GenericPrompt */ "gp": #f16372,
+    /* GenericStrong */ "gs": #f16372,
+    /* GenericSubheading */ "gu": #f16372,
+    /* GenericTraceback */ "gt": #f16372,
+    /* TextWhitespace */ "w": #bbbbbb
+);
