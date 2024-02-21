@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>CTF - Tag - Cnily03&#39;s Playground</title>
+        <link>https://cnily.me/en/tags/ctf/</link>
+        <description>CTF - Tag - Cnily03&#39;s Playground</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 23 Oct 2022 09:43:12 &#43;0800</lastBuildDate><atom:link href="https://cnily.me/en/tags/ctf/" rel="self" type="application/rss+xml" /><item>
+    <title>题解 - NewStar 2022 Week 5</title>
+    <link>https://cnily.me/en/posts/ctf/wp/2022/newstar-week5/</link>
+    <pubDate>Sun, 23 Oct 2022 09:43:12 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/ctf/wp/2022/newstar-week5/</guid>
+    <description><![CDATA[CRYPTO flip-flop题目中的关键代码如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 生成 authcode auth_pt = b&#39;NewStarCTFer____&#39; user_key = os.urandom(16) cipher = AES.new(auth_major_key, AES.MODE_CBC, user_key) code = cipher.encrypt(auth_pt) print(f&#39;here is your authcode: {user_key.hex() + code.hex()}&#39;) # 解码 authcode user_key = bytes.fromhex(authcode)[:16] code = bytes.fromhex(authcode)[16:] cipher]]></description>
+</item></channel>
+</rss>
