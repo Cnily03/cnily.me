@@ -1,0 +1,114 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Cnily03 Home</title>
+        <link>https://cnily.me/</link>
+        <description>Cnily03 的个人博客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 30 Nov 2022 18:41:26 &#43;0800</lastBuildDate>
+            <atom:link href="https://cnily.me/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>顾史说</title>
+    <link>https://cnily.me/posts/wenyan/gushi-shuo/</link>
+    <pubDate>Wed, 30 Nov 2022 18:41:26 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/wenyan/gushi-shuo/</guid>
+    <description><![CDATA[<p>夫闻第千年以来，九土临有尧舜之芳躅、六飞之从骑，故土蒙罹黄河之决水、胡马之铁蹄。其尽万般而一族，历千患而同域，素不闻远洋之异肤，雅不识坤與之洲陆。故自鸦片之耻端，轮甲子而故步；更戊戌之新政，觉秦制而烂柯。时神州之义旗纷举而不能改其索，街巷之火光交错而不能除其弊；修齐治平难以中兴，我戕自缢寻以当道。盖非革命之循史，必有新义，又何救亡之乏术哉？</p>]]></description>
+</item><item>
+    <title>题解 - NewStar 2022 Week 5</title>
+    <link>https://cnily.me/posts/ctf/wp/2022/newstar-week5/</link>
+    <pubDate>Sun, 23 Oct 2022 09:43:12 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/ctf/wp/2022/newstar-week5/</guid>
+    <description><![CDATA[<h2 id="crypto" class="headerLink">
+    <a href="#crypto" class="header-mark"></a>CRYPTO</h2><h3 id="flip-flop" class="headerLink">
+    <a href="#flip-flop" class="header-mark"></a>flip-flop</h3><p>题目中的关键代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 生成 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_pt</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;NewStarCTFer____&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">auth_major_key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">user_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">auth_pt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;here is your authcode: </span><span class="si">{</span><span class="n">user_key</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span> <span class="o">+</span> <span class="n">code</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 解码 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[:</span><span class="mi">16</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[</span><span class="mi">16</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">auth_major_key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">user_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_pt</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">auth_pt</span> <span class="o">==</span> <span class="s1">&#39;AdminAdmin______&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们要使解码后的 <code>auth_pt</code> 为 <code>AdminAdmin______</code>.</p>
+<p>我们已知密文 <code>cipher = code</code>, 初始向量 <code>iv = user_key</code> 和明文 <code>plain = b'NewStarCTFer____'</code>. 可以考虑字节翻转攻击。</p>]]></description>
+</item><item>
+    <title>Lifelong Bonus</title>
+    <link>https://cnily.me/posts/lifelong-bonus/</link>
+    <pubDate>Sat, 15 Oct 2022 17:18:41 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/lifelong-bonus/</guid>
+    <description><![CDATA[<div class="admonition tip open">
+            <div class="admonition-content">相关附件（仅限教学或个人学习使用）
+<a href="https://cdn.cnily.top/public/docs/Lifelong%20Bonus.pptx" target="_blank" rel="noopener noreferrer" class="float-right color-only"><i class='fas fa-link'></i> PPT</a>
+<span tyle="width:.5em;" class="float-right color-only"> </span>
+<a href="https://cdn.cnily.top/public/docs/Lifelong%20Bonus.docx" target="_blank" rel="noopener noreferrer" class="float-right color-only"><i class='fas fa-link'></i> 文档</a></div>
+        </div>
+<p>Following the rhythm in this era of rapid development, we have never questioned or pondered a roadway that we move forward from local to global, from school to college.</p>
+<p>The predefined life could never box someone in the frame of popularity, however, for there are always people who have their own novel ideas and try to achieve them. Maybe you think the rise of Microsoft and Alibaba has proved the insignificance of attending college, but facts show that opportunities and well-beings seldom blaze a trail for who lack college experience.</p>]]></description>
+</item><item>
+    <title>观党史怀古二首</title>
+    <link>https://cnily.me/posts/wenyan/poetry/guandangshi-huaigu/</link>
+    <pubDate>Thu, 22 Sep 2022 21:31:00 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/wenyan/poetry/guandangshi-huaigu/</guid>
+    <description><![CDATA[其一：厦倾神器借天光，烈火播荃覆五洋。……其二：金瓯初日补霞光，共产德兴诩莽洋。……]]></description>
+</item><item>
+    <title>先怀来思赋</title>
+    <link>https://cnily.me/posts/wenyan/xianhuai-laisi-fu/</link>
+    <pubDate>Wed, 21 Sep 2022 22:33:57 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/wenyan/xianhuai-laisi-fu/</guid>
+    <description><![CDATA[凤下千仞，麒麟穆立。莺鸾从舞，乾元康泰。天子本然，女娲所降于乾坤；士气排然，刈钁所驰于田塍。夫党发轫于荆棘，斩虺于三界。淬水火而炼其钢，钟四海而聚其流。兢兢业业，盖建纲于工农之基；浩浩汤汤，故策勋于颓危之际。旦则并马列于尧舜，夕则骋雄狮于江河。旂旌震扬于华夏，貔貅复怒于神州。]]></description>
+</item><item>
+    <title>答Z20作文：浴身火海，御生火海</title>
+    <link>https://cnily.me/posts/hss/live-in-fire-save-in-flame/</link>
+    <pubDate>Sat, 28 May 2022 23:18:08 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/hss/live-in-fire-save-in-flame/</guid>
+    <description><![CDATA[<p>中华民族向来有着悠久的“读书”历史，从刻录古代国人智慧的龟甲，到厚载文墨尺牍的纸张，记录着一代又一代读书人秉烛苦读的身影，承载着多少青年志士挥毫笔墨、文武救国的情怀。纵古博今，从先秦孔子“古之学者为己”的呼声，到唐朝“功名祗向马上取”的豪言，读书跳出修身之框，始逐名利；从北宋陆游“读书本意在元元”的论断，到近代“为中华之崛起而读书”的慷慨陈词，读书架起串联苍生与民族、自我与家国的桥梁，激励着无数青年前仆后继、继往开来。</p>]]></description>
+</item><item>
+    <title>是什么毁了《听我说谢谢你》</title>
+    <link>https://cnily.me/posts/hss/what-ruins-i-wanna-say-thank-you/</link>
+    <pubDate>Fri, 29 Apr 2022 15:44:01 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/hss/what-ruins-i-wanna-say-thank-you/</guid>
+    <description><![CDATA[<p>在当今时代，短视频势如破竹，成为互联网上不可忽视的流量巨头、转播媒介。近期，歌曲《听我说谢谢你》传遍全网，饱受诟责。不少网友在医护工作者面前表演、歌唱这首曲子，严重扰乱了医护人员的正常工作秩序，继而上传到短视频平台，类似事件不断被模仿、发生，造成了一定的社会危害，引发了人们的热议。</p>]]></description>
+</item><item>
+    <title>标志重捕法部分问题探究</title>
+    <link>https://cnily.me/posts/mse/rough-probe-into-mark-and-recapture/</link>
+    <pubDate>Sun, 02 Jan 2022 02:50:13 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/mse/rough-probe-into-mark-and-recapture/</guid>
+    <description><![CDATA[本文复现了标志重捕法的证明，系统探讨了标志重捕法在实际实验中的误差情况。本文着重研究了不同网眼大小的渔网对统计鱼的种群密度的影响。本文简要介绍了另一种更精确的标志重捕法 Schnabel method.]]></description>
+</item><item>
+    <title>有山先生论</title>
+    <link>https://cnily.me/posts/wenyan/ysxs-lun/</link>
+    <pubDate>Sun, 09 May 2021 17:17:30 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/wenyan/ysxs-lun/</guid>
+    <description><![CDATA[<p>有山先生者，吾所敬也，盖以身心之求乎先生之所处世，而力不从者，诚以所遇所经而不可效也。而吾独旌其所处世，以为有古之遗风存焉，<strong>而斯亦所遇所经就之也</strong>。</p>]]></description>
+</item><item>
+    <title>浅析海明威《好狮子》</title>
+    <link>https://cnily.me/posts/lit/analysis-of-hemingway-the-good-lion/</link>
+    <pubDate>Sat, 29 Aug 2020 23:31:37 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/posts/lit/analysis-of-hemingway-the-good-lion/</guid>
+    <description><![CDATA[海明威短篇小说《好狮子》中的好狮子是一种对文化霸权主义的高度概括，折射出其顽固虚伪的本质；好狮子的经历亦可解读为是心灵美好者在幽暗环境中被同化的过程；文章歌颂了坚贞、勇武的品格，批判了华而不实和背叛的行为，表达了对复杂环境中依然挺立的人的同情；“迷惘的一代”作为海明威的写作背景折射出文章的现实意义；文中好狮子与坏狮子的交往引起对人际交往中宽容和认同的思考；文章在思想道德层面的当代借鉴意义体现在文化霸权主义、傲慢与偏见、社会生存与交往、人性与精神等方面。]]></description>
+</item></channel>
+</rss>
