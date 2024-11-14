@@ -1,0 +1,45 @@
+{{- /* lightgallery.js */ -}}
+{{- $src := .Src -}}
+{{- with dict "Path" .Src "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $src = .RelPermalink -}}
+{{- end -}}
+
+{{- $small := .SrcSmall | default $src -}}
+{{- with dict "Path" .SrcSmall "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $small = .RelPermalink -}}
+{{- end -}}
+
+{{- $large := .SrcLarge | default $src -}}
+{{- with dict "Path" .SrcLarge "Resources" .Resources | partial "function/resource.html" -}}
+    {{- $large = .RelPermalink -}}
+{{- end -}}
+
+{{- $alt := .Alt | default $src -}}
+{{- $loading := .Loading | default "lazy" -}}
+
+{{- if .Linked -}}
+    <a class="lightgallery" href="{{ $large | safeURL }}" title="{{ .Title }}" data-thumbnail="{{ $small | safeURL }}"{{ with .Caption }} data-sub-html="<h2>{{ . }}</h2>{{ with $.Title }}<p>{{ . }}</p>{{ end }}"{{ else }}{{ with .Title }} data-sub-html="<h2>{{ . }}</h2>"{{ end }}{{ end }}{{ with .Rel }} rel="{{ . }}"{{ end }}>
+        <img
+            {{ with .Class }}class="{{ . }}"{{ end }}
+            loading="{{ $loading }}"
+            src="{{ .Src | safeURL }}"
+            srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+            sizes="auto"
+            {{- if .Injected -}}
+                onload="SVGInject(this);this.style.maxWidth=/[a-zA-Z]+/.test('{{ .MaxWidth }}')?'{{ .MaxWidth }}':'{{ .MaxWidth }}px';{{- if .Autofit -}}this.style.display='block';this.style.margin='auto';this.style.width='100%'{{- end -}}"
+            {{- end -}}
+            alt="{{ $alt }}"{{ with .Height }}height="{{ . }}"{{ end }}{{ with .Width }}width="{{ . }}"{{ end }}>
+    </a>
+{{- else -}}
+    <img
+        {{ with .Class }}class="{{ . }}"{{ end }}
+        loading="{{ $loading }}"
+        src="{{ .Src | safeURL }}"
+        srcset="{{ $small | safeURL }}, {{ .Src | safeURL }} 1.5x, {{ $large | safeURL }} 2x"
+        sizes="auto"
+        alt="{{ $alt }}"
+        {{- if .Injected -}}
+            onload="SVGInject(this);this.style.maxWidth=/[a-zA-Z]+/.test('{{ .MaxWidth }}')?'{{ .MaxWidth }}':'{{ .MaxWidth }}px';{{- if .Autofit -}}this.style.display='block';this.style.margin='auto';this.style.width='100%'{{- end -}}"
+        {{- end -}}
+        title="{{ .Title }}"{{ with .Height }} height="{{ . }}"{{ end }}{{ with .Width }} width="{{ . }}"{{ end }}>
+{{- end -}}

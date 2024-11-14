@@ -1,0 +1,242 @@
+{{- define "title" }}
+    {{- T "pageNotFound" | printf "404 %v" }} - {{ .Site.Title -}}
+{{- end -}}
+
+{{- define "content" -}}
+    <div class="page" id="content-404">
+        <h1 id="error-emoji"></h1>
+        <p class="error-text">
+            {{- T "pageNotFoundText" -}}&nbsp;
+            <a href="javascript:void(0);" title="{{ T `back` }}" onclick="window.history.back();"><i class="far fa-hand-point-left fa-fw"></i></a>
+        </p>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            var emojiArray = ['\\(o_o)/', '(˚Δ˚)b', '(^-^*)', '(≥o≤)', '(^_^)b', '(·_·)','(=\'X\'=)', '(>_<)', '(;-;)'];
+            document.getElementById('error-emoji').appendChild(document.createTextNode(emojiArray[Math.floor(Math.random() * emojiArray.length)]));
+        })();
+    </script>
+    
+    <!-- Fool You -->
+    <div id="foolyou" style="display: none; position: fixed; z-index: 999; opacity: 0; width: 10vw; height: 10vh; top: 0; bottom: 0; left: 0; right: 0; margin:auto; overflow: hidden;">
+        <iframe title="Rick Astley - Never Gonna Give You Up" height="100%" width="100%" referrerpolicy="origin-when-cross-origin" scrolling="no" border="0" frameborder="0" allow="accelerometer; autoplay; fullscreen; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="true" style="width: 100%; height: 100%;"></iframe>
+    </div>
+    <script type="text/javascript">
+        (function() {
+            const _time = new Date();
+            const curDate = _time.toLocaleDateString().replace(/\//g, '-'),
+                  curTime = _time.toLocaleTimeString(),
+                  [curYear, curMonth, curDay] = curDate.split('-').map(Number),
+                  [curHour, curMinute, curSecond] = curTime.split(':').map(Number);
+            // Handle Url Value
+            const GetUrlValue = function (name) {
+                var reg = new RegExp('(^|&)' + encodeURI(name) + '=([^&]*)(&|$)', 'i');
+                var r = window.location.search.slice(1).match(reg);
+                if (r != null) {
+                    try {
+                        let val = decodeURIComponent(r[2]);
+                        return /^[0-9]+$/.test(val) ? Number(val) : val;
+                    } catch (e) {
+                        return undefined;
+                    }
+                }
+                return undefined;
+            }
+            const HasUrlValue = function (name) {
+                var reg = new RegExp('(^|&)' + encodeURI(name) + '=?([^&]*)(&|$)', 'i');
+                var r = window.location.search.slice(1).match(reg);
+                return r != null;
+            }
+            // Entrance of Foolyou
+            var entrance = [
+                HasUrlValue('foolyou') && GetUrlValue('foolyou') != 0,
+                curMonth == 4 && curDay == 1
+            ].map(Boolean);
+            if(entrance[0]) console.info("Emit foolyou function manually");
+            if(entrance.includes(true)) emitFoolyouEvent();
+            var isMobile = !!((navigator.userAgentData || {}).mobile || navigator.userAgent.match(/Mobi/i) || navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone/i))
+            function emitFoolyouEvent() {
+                var hasEmitted = false;
+                // Cookie
+                const Cookie = {
+                    set: function(name, value, expMs) {
+                        let date = new Date();
+                        date.setTime(date.getTime() + expMs);
+                        const expires = "expires=" + date.toUTCString();
+                        document.cookie = name + "=" + value + "; " + expires + "; path=/";
+                    },
+                    delete: function(name) {
+                        document.cookie = name + "=; " + new Date().toUTCString() + "; path=/";
+                    },
+                    get: function(name) {
+                        const nameExt = name + "=";
+                        const cArr = document.cookie.split('; ');
+                        let res;
+                        cArr.forEach(c => {
+                            if (c.indexOf(nameExt) === 0) res = c.substring(nameExt.length);
+                        })
+                        return res;
+                    }
+                }
+                // HTTP Request
+                const httpRequest = {
+                    /* {url, responseType, callback} */
+                    get: json => {
+                        const f_url = json.url.replace(/\\/g, "/");
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("GET", f_url, true);
+                        xhr.responseType = json.responseType || "text";
+                        xhr.onload = () => {
+                            if(json.callback) json.callback(xhr);
+                        };
+                        xhr.onerror = (e) => {
+                            if(json.error) json.error(e);
+                        }
+                        xhr.send();
+                    },
+                    /* {url, data, contentType, responseType, callback} */
+                    post: json => {
+                        const f_url = json.url.replace(/\\/g, "/");
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", f_url, true);
+                        xhr.setRequestHeader(
+                            "Content-Type",
+                            json.contentType || "application/x-www-form-urlencoded"
+                        );
+                        xhr.responseType = json.responseType || "text";
+                        xhr.onload = () => {
+                            if(json.callback) json.callback(xhr);
+                        };
+                        xhr.onerror = (e) => {
+                            if(json.error) json.error(e);
+                        }
+                        xhr.send(json.data || null);
+                    },
+                }
+                // Timer
+                /* 
+                 * Http requests are sent at the very beginning.
+                 * But the show-video event is required to be launched afther the delay.
+                 * If delay is run out but http requests are not all accomplished, it will wait `TTL` more seconds.
+                 * If all http requests are already done after the delay, it will call show-video event immediately.
+                 */
+                const DELAY = 3000;
+                const TTL = 7000;
+                const START_TIME = Date.now();
+                const Timer = setTimeout(() => emitVideoEvent(), DELAY + TTL);
+                // Handle Video Display
+                var srcMap = {
+                    BiliBili: "//foolyou.cnily.me/bilibili?iframe=1",
+                    YouTube: "//foolyou.cnily.me/youtube?iframe=1"
+                }
+                const FOOL_DOM = document.getElementById("foolyou"), IFRAME_DOM = FOOL_DOM.getElementsByTagName("iframe")[0];
+                FOOL_DOM._hide = () => {
+                    FOOL_DOM.style.display = 'none';
+                }
+                FOOL_DOM._preshow = () => {
+                    FOOL_DOM.style.transition = '';
+                    FOOL_DOM.style.transform = 'translateY(-100%)';
+                    FOOL_DOM.style.display = 'block';
+
+                    FOOL_DOM.style.width = "10vw", FOOL_DOM.style.height = "10vh";
+                    // FOOL_DOM.style.borderRadius = '10rem';
+                    FOOL_DOM.style.opacity = "0";
+                    FOOL_DOM.style.transition = "height ease-in .8s, width ease-in .8s, border-radius ease-in-out .8s, opacity ease .3s";
+                }
+                FOOL_DOM._show = () => {
+                    FOOL_DOM.style.display = 'block';
+                    FOOL_DOM.style.transform = '';
+
+                    FOOL_DOM.style.width = "100vw", FOOL_DOM.style.height= "100vh";
+                    // FOOL_DOM.style.borderRadius = '0';
+                    FOOL_DOM.style.opacity = "100%";
+
+                    setTimeout(function() {
+                        FOOL_DOM.style.transition = "opacity ease .3s";
+                    }, 800);
+                }
+                function isVisitableJSON(v) {
+                    return Boolean(v && !Array.isArray(v) && typeof v == "object")
+                }
+                async function expandUrl(url) {
+                    let aEl;
+                    url = (aEl = document.createElement("a"), aEl.href = url, aEl.href);
+                    let UrlExpandCache = JSON.parse(decodeURIComponent(Cookie.get("UrlExpandCache") || "{}"));
+                    return UrlExpandCache[url] || await new Promise(resolve=>{
+                        httpRequest.post({
+                            url: "https://tenapi.cn/v2/shorturl",
+                            data: "url=" + encodeURIComponent(url),
+                            contentType: "application/x-www-form-urlencoded",
+                            responseType: "json",
+                            callback: function(xhr) {
+                                if(isVisitableJSON(xhr.response) && xhr.response.code == 200) {
+                                    var storedUrl = /^HTTP\//.test(xhr.response.data.url) ? url : xhr.response.data.url
+                                    UrlExpandCache[url] = storedUrl;
+                                    Cookie.set("UrlExpandCache", encodeURIComponent(JSON.stringify(UrlExpandCache)), 24 * 60 * 60 * 1000)
+                                    resolve(storedUrl);
+                                } else resolve(url);
+                            },
+                            error: function(e) { resolve(url); }
+                        })
+                    })
+                }
+                async function getSrc(src) {
+                    src = isMobile ? src + "&mobile=1" : src;
+                    return await expandUrl(src);
+                }
+                function setSrc(src) {
+                    IFRAME_DOM.src = src;
+                }
+                function getSrcNameByRegion(region = 'CN') {
+                    if(['CN', 'HK', 'MO', 'TW'].includes(region)) return "BiliBili";
+                    else return "YouTube";
+                }
+                function showVideo() {
+                    FOOL_DOM._hide();
+                    FOOL_DOM._preshow();
+                    setTimeout(function() {
+                        FOOL_DOM._show();
+                    }, 2750);
+                }
+                function emitVideoEvent(region = 'CN') {
+                    hasEmitted = true;
+                    const srcName = getSrcNameByRegion(region);
+                    if(srcName == "YouTube") IFRAME_DOM.onload = function() {
+                        IFRAME_DOM.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                    }
+                    getSrc(srcMap[srcName]).then((realSrc) => {
+                        let waitTime = DELAY - (Date.now() - START_TIME);
+                        waitTime = waitTime < 0 ? 0 : waitTime;
+                        setTimeout(() => {
+                            setSrc(realSrc);
+                            showVideo();
+                        }, waitTime);
+                    })
+                }
+                // Get and handle IP and region
+                httpRequest.get({
+                    // China mainland ip api, get the real IP but not the proxied one (global proxy excepted)
+                    url: "https://tenapi.cn/v2/getip",
+                    responseType: "json",
+                    callback: function(xhr) {
+                        if(isVisitableJSON(xhr.response) && xhr.response.code == 200){
+                            const IP = xhr.response.data.ip;
+                            httpRequest.get({
+                                url: "//freeipapi.com/api/json/" + IP,
+                                responseType: "json",
+                                callback: function(xhr) {
+                                    regionCode = undefined;
+                                    if(isVisitableJSON(xhr.response) && xhr.response.countryCode != "-")
+                                        regionCode = xhr.response.countryCode;
+                                    if(!hasEmitted) clearTimeout(Timer), emitVideoEvent(regionCode)
+                                },
+                                error: function(e) { if(!hasEmitted) clearTimeout(Timer), emitVideoEvent() }
+                            })
+                        }
+                    },
+                    error: function(e) { if(!hasEmitted) clearTimeout(Timer), emitVideoEvent() }
+                })
+            }
+        })();
+    </script>
+{{- end -}}
