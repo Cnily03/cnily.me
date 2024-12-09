@@ -1,0 +1,51 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>CTF - Category - Cnily03&#39;s Playground</title>
+        <link>https://cnily.me/en/categories/ctf/</link>
+        <description>CTF - Category - Cnily03&#39;s Playground</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 23 Oct 2022 09:43:12 &#43;0800</lastBuildDate><atom:link href="https://cnily.me/en/categories/ctf/" rel="self" type="application/rss+xml" /><item>
+    <title>题解 - NewStar 2022 Week 5</title>
+    <link>https://cnily.me/en/posts/ctf/wp/2022/newstar-week5/</link>
+    <pubDate>Sun, 23 Oct 2022 09:43:12 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/ctf/wp/2022/newstar-week5/</guid>
+    <description><![CDATA[<h2 id="crypto" class="headerLink">
+    <a href="#crypto" class="header-mark"></a>CRYPTO</h2><h3 id="flip-flop" class="headerLink">
+    <a href="#flip-flop" class="header-mark"></a>flip-flop</h3><p>题目中的关键代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 生成 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_pt</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;NewStarCTFer____&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">auth_major_key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">user_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">auth_pt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;here is your authcode: </span><span class="si">{</span><span class="n">user_key</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span> <span class="o">+</span> <span class="n">code</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 解码 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[:</span><span class="mi">16</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[</span><span class="mi">16</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">auth_major_key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">user_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_pt</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">auth_pt</span> <span class="o">==</span> <span class="s1">&#39;AdminAdmin______&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们要使解码后的 <code>auth_pt</code> 为 <code>AdminAdmin______</code>.</p>
+<p>我们已知密文 <code>cipher = code</code>, 初始向量 <code>iv = user_key</code> 和明文 <code>plain = b'NewStarCTFer____'</code>. 可以考虑字节翻转攻击。</p>]]></description>
+</item></channel>
+</rss>

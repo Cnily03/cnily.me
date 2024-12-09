@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数理科学 - Category - Cnily03&#39;s Playground</title>
+        <link>https://cnily.me/en/categories/%E6%95%B0%E7%90%86%E7%A7%91%E5%AD%A6/</link>
+        <description>数理科学 - Category - Cnily03&#39;s Playground</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 02 Jan 2022 02:50:13 &#43;0800</lastBuildDate><atom:link href="https://cnily.me/en/categories/%E6%95%B0%E7%90%86%E7%A7%91%E5%AD%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>标志重捕法部分问题探究</title>
+    <link>https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/</link>
+    <pubDate>Sun, 02 Jan 2022 02:50:13 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/</guid>
+    <description><![CDATA[本文复现了标志重捕法的证明，系统探讨了标志重捕法在实际实验中的误差情况。本文着重研究了不同网眼大小的渔网对统计鱼的种群密度的影响。本文简要介绍了另一种更精确的标志重捕法 Schnabel method.]]></description>
+</item></channel>
+</rss>
