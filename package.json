@@ -1,0 +1,23 @@
+{
+  "name": "cnily.me",
+  "version": "1.0.0",
+  "description": "My blog website",
+  "scripts": {
+    "install:win": "choco install hugo && choco install hugo-extended",
+    "install:linux": "brew install hugo && brew install hugo-extended",
+    "get-theme": "git clone -b main https://github.com/HEIGE-PCloud/DoIt.git themes/DoIt && cd themes/DoIt && git reset --hard e91cd05 && cd ../..",
+    "serve": "hugo serve",
+    "build:public": "hugo -d public --buildFuture",
+    "build:private": "hugo -d private --buildFuture",
+    "webhook:dev": "if [ ! -d 'logs' ]; then mkdir logs; fi && if [ ! -d 'logs/webhook' ]; then mkdir logs/webhook; fi && logfn=logs/webhook/$(date +%Y%m%d%H%M%S).log && touch $logfn && node webhook.js | tee $logfn",
+    "webhook": "pm2 start webhook.js --name webhook",
+    "sync-static:init": "bash sync-static.sh init",
+    "sync-static": "bash sync-static.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cnily03/cnily.me"
+  },
+  "author": "Jevon Wang",
+  "license": "Apache-2.0"
+}

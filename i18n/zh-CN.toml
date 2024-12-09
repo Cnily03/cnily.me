@@ -1,0 +1,42 @@
+# Translations for Simplified Chinese
+# 简体中文的翻译
+# https://gohugo.io/content-management/multilingual/#translation-of-strings
+
+# === partials/footer.html ===
+[poweredBy]
+other = "Powered by <span id='footer-engine'>{{ .Hugo }}</span>"
+
+[hostedOn]
+other = "Hosted on {{ .Host }}"
+
+[theme]
+other = "Theme - {{ .Theme }}"
+# === partials/footer.html ===
+
+# === Post ===
+[posts]
+other = "文章"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "所有{{ .Some }}"
+
+[tag]
+other = "标签"
+
+[tags]
+other = "标签"
+
+[category]
+other = "分类"
+
+[categories]
+other = "分类"
+
+[series]
+other = "系列"
+
+[window]
+other = "橱窗"
+# === Taxonomy ===

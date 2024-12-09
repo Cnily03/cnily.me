@@ -1,0 +1,22 @@
+.single {
+    .content.func-quote-light {
+        blockquote {
+            $blockquote-color: #b9cdd3;
+            $blockquote-color-dark: #606f7f;
+            $blockquote-color-black: #726f6f;
+
+            border-left-color: $blockquote-color;
+            background-color: rgba($blockquote-color, 0.2);
+
+            [theme="dark"] & {
+                border-left-color: $blockquote-color-dark;
+                background-color: rgba($blockquote-color-dark, 0.2);
+            }
+
+            [theme="black"] & {
+                border-left-color: $blockquote-color-black;
+                background-color: rgba($blockquote-color-black, 0.2);
+            }
+        }
+    }
+}

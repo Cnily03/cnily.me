@@ -1,0 +1,10 @@
+<!-- 首页社交账号的 Tooltip -->
+{{- $rel := "" -}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title }} class="tooltip tooltip-bottom" data-tooltip="{{ . }}"{{ end }}{{ if (urls.Parse .Destination).Host | or .Newtab }}{{ $rel = "noopener noreferrer" }} target="_blank"{{ end }} rel="{{ $rel }}{{ with .Rel }} {{ . }}{{ end }}"{{ with .Class }} class="{{ . }}"{{ end }}>
+    {{- with .Icon -}}
+        {{- partial "plugin/icon.html" . -}}
+    {{- end -}}
+    {{- with .Content -}}
+        {{- . | safeHTML -}}
+    {{- end -}}
+</a>
