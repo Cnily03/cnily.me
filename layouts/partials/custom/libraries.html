@@ -1,0 +1,29 @@
+{{ with .elements }}
+    {{- $css := cond (eq (printf "%T" .css) "[]interface {}") .css (slice .css) -}}
+    {{ range $css }}
+        {{- if eq  (printf "%T" .) "string" -}}
+            <link rel="stylesheet" href="{{ . | absURL }}">
+        {{- else if isset . "src" -}}
+            {{ if eq .defer true }}
+                <link rel="stylesheet" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{ . | absURL }}">
+                <noscript><link rel="stylesheet" href="{{ . | absURL }}"></noscript>
+            {{ else if isset . "src" }}
+                <link rel="stylesheet" href="{{ .src | absURL }}">
+            {{ end }}
+        {{- end -}}
+    {{- end }}
+
+    {{- $js := cond (eq (printf "%T" .js) "[]interface {}") .js (slice .js) -}}
+    {{ range $js }}
+        {{ if eq  (printf "%T" .) "string" }}
+            <script type="text/javascript" src="{{ . | absURL }}"></script>
+        {{ else if isset . "src" }}
+            <script type="text/javascript" src="{{ .src | absURL }}"{{ if eq .defer true }} defer{{ end }}{{ if eq .async true }} async{{ end }}></script>
+        {{ end }}
+    {{- end }}
+
+    {{- $raw := cond (eq (printf "%T" .raw) "[]interface {}") .raw (slice .raw) -}}
+    {{ range $raw }}
+        {{ . | safeHTML }}
+    {{- end }}
+{{ end }}

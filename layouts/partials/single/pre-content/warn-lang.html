@@ -1,0 +1,37 @@
+{{- /* $params := .Scratch.Get "params" */ -}}
+<div id="warn-not-translated" class="admonition warning open">
+    <div class="admonition-content"></div>
+</div>
+<script>
+    // Render content untranslated warnings
+    (function () {
+        const s = document.getElementById("warn-not-translated").children[0]
+
+        // === CONFIG ===
+        /**
+         * Quote params in ${...} to auto render.
+         * Allowed params are as followings.
+         * - lang
+         * - lang:name
+         * - lang:code
+         */
+        const TRANSLATION = {
+            "en": "The content you are now visiting may haven't been translated to <b>${lang}</b>",
+            "zh-cn": "您正在浏览的内容可能未被翻译为<b>${lang}</b>",
+        }
+        TRANSLATION.FALLBACK = "您正在浏览的内容可能未经过翻译\nThe content you are now visiting might hasn't been translated"
+        // === END ===
+
+        var select_code = "{{ .Site.Language.Lang }}"
+        var select_name = "{{ .Site.Language.LanguageName }}"
+
+        var content = (TRANSLATION[select_code] || TRANSLATION.FALLBACK).replace(/\r?\n/g, "<br>")
+            .replace(/\$\{ *lang *\}/g, select_name)
+            .replace(/\$\{ *lang:name *\}/g, select_name)
+            .replace(/\$\{ *lang:code *\}/g, select_code)
+        s.innerHTML = content || TRANSLATION.FALLBACK.replace(/\r?\n/g, "<br>")
+
+        // remove <script> tag
+        document.getElementById("warn-not-translated").nextElementSibling.remove()
+    })()
+</script>

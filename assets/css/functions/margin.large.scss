@@ -1,0 +1,31 @@
+.single {
+    .content {
+        &.func-margin-large {
+            // 全局
+            line-height: 1.7;
+
+            // 直属段落
+            > p {
+                margin: 0.7rem 0;
+            }
+
+            // 其他元素中的段落
+            p:not(.single .content > p) {
+                margin: 0.5rem 0;
+            }
+
+            // p:not(.single .content > p):first-child {
+            //     margin-top: 0.5rem;
+            // }
+
+            // p:not(.single .content > p):last-child {
+            //     margin-bottom: 0.5rem;
+            // }
+        }
+
+        // 标题
+        .headerLink {
+            line-height: 1.6;
+        }
+    }
+}

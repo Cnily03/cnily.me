@@ -1,0 +1,39 @@
+{{- define "title" }}{{ .Title }} - {{ .Site.Title }}{{ end -}}
+
+{{- define "content" -}}
+    {{- with index .Site.Params.custom.libraries "page-start" -}}{{- partial "custom/libraries.html" (dict "elements" .) -}}{{- end -}}
+    {{- $params := .Scratch.Get "params" -}}
+    <div class="page single special">
+        {{- /* Title */ -}}
+        <h1 class="single-title animate__animated animate__pulse animate__faster">
+            {{- .Title -}}
+        </h1>
+
+        {{- /* Subtitle */ -}}
+        {{- with $params.subtitle -}}
+            <h2 class="single-subtitle">{{ . }}</h2>
+        {{- end -}}
+
+        {{- /* Pre-Content */ -}}
+        <div class="content" id="pre-content">
+            {{- if eq $params.warnlang true -}}
+                {{- partial "single/pre-content/warn-lang.html" . -}}
+            {{- end -}}
+            {{- if or (isset $params "repost-link") (isset $params "repost-text") -}}
+                {{- partial "single/pre-content/repost-info.html" . -}}
+            {{- end -}}
+        </div>
+
+        {{- /* Content */ -}}
+        {{- with $params.indent -}}
+            <style>#content > p { text-indent: {{ . }}em;}</style>
+        {{- end -}}
+        <div class="content{{ with $params.margin }} func-margin-{{ . }}{{ end }}{{ with $params.quote }} func-quote-{{ . }}{{ end }}" id="content">
+            {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+        </div>
+
+        {{- /* Comment */ -}}
+        {{- partial "comment.html" . -}}
+    </div>
+    {{- with index .Site.Params.custom.libraries "page-end" -}}{{- partial "custom/libraries.html" (dict "elements" .) -}}{{- end -}}
+{{- end -}}

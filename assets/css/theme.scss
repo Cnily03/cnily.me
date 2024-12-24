@@ -1,0 +1,168 @@
+// ========== Global ========== //
+// Color of the background
+$global-background-color-dark: #2e303e;
+// Color of the text
+$global-font-color-dark: #e0e0f1;
+// Color of the secondary text
+$global-font-secondary-color-dark: #c5c7d2;
+// Color of the link
+$global-link-color-dark: #e0e0f1;
+// Color of the hover link
+$global-link-hover-color: #5755d9;
+$global-link-hover-color-dark: #ffffff;
+// Color of the border
+$global-border-color-dark: #344b78;
+// Color of the single link
+$single-link-color: #00a0d8;
+$single-link-color-dark: #55bde2;
+// Color of the hover single link
+$single-link-hover-color: #302ecd;
+$single-link-hover-color-dark: #bdebfc;
+// ========== Global ========== //
+
+// ========== Header ========== //
+// Color of the header background
+$header-background-color-dark: #262731;
+// Color of the hover header item
+$header-hover-color: #161209;
+$header-hover-color-dark: #ffffff;
+// ========== Header ========== //
+
+// ========== Single Content ========== //
+// Color of the table background
+$table-background-color-dark: #21222c;
+// Color of the table thead
+$table-thead-color-dark: #20252b;
+// Color of the blockquote
+$blockquote-color-dark: #59c5ec;
+// ========== Single Content ========== //
+
+// ========== Pagination ========== //
+// Color of the link in pagination
+$pagination-link-color: #00a0d8;
+$pagination-link-color-dark: #a9a9b3;
+// Color of the hover link in pagination
+$pagination-link-hover-color: #302ecd;
+$pagination-link-hover-color-dark: #ffffff;
+// ========== Pagination ========== //
+
+// ========== Friend Link ========== //
+// Color of friend link background
+$friend-link-background-color-dark: #23252f;
+// Color of friend link
+$friend-link-color: #302ecd;
+$friend-link-color-dark: #e0e0f1;
+// Color of hover friend link text
+$friend-link-hover-color-dark: #ffffff;
+// ========== Friend Link ========== //
+
+// ========== Selection ========== //
+// Color of the selected text
+$selection-color-dark: rgba(50, 112, 194, 0.4);
+// Color of the search background
+$search-background-color-dark: #344b78;
+// ========== Selection ========== //
+
+// ========== Sponsor Button ========== //
+// Sponsor button background color
+$sponsor-button-background-color-dark: #344b78;
+// Sponsor button background color while in the :hover state
+$sponsor-button-hover-background-color-dark: #344b78;
+// ========== Sponsor Button ========== //
+
+// ========== Code ========== //
+// Color of the code
+$code-color-dark: #e5bf78;
+// Color of the code background
+$code-background-color-dark: #21222c;
+// Color of the code info
+$code-info-color-dark: #b1b0b0;
+// Color map of the code highlight
+$code-highlight-color-map-dark: (
+    /* Parentheses */ "p": #a9a9b3,
+    /* Keyword */ "k": #d371e3,
+    /* KeywordConstant */ "kc": #d371e3,
+    /* KeywordDeclaration */ "kd": #d371e3,
+    /* KeywordNamespace */ "kn": #d371e3,
+    /* KeywordPseudo */ "kp": #d371e3,
+    /* KeywordReserved */ "kr": #d371e3,
+    /* KeywordType */ "kt": #d371e3,
+    /* Name */ "n": #a9b2c0,
+    /* NameAttribute */ "na": #41b0f5,
+    /* NameBuiltin */ "nb": #19b9c4,
+    /* NameBuiltinPseudo */ "bp": #ecbf6f,
+    /* NameClass */ "nc": #ecbf6f,
+    /* NameConstant */ "no": #41b0f5,
+    /* NameDecorator */ "nd": #ecbf6f,
+    /* NameEntity */ "ni": #41b0f5,
+    /* NameException */ "ne": #41b0f5,
+    /* NameFunction */ "nf": #41b0f5,
+    /* NameFunctionMagic */ "fm": #19b9c4,
+    /* NameLabel */ "nl": #41b0f5,
+    /* NameNamespace */ "nn": #41b0f5,
+    /* NameOther */ "nx": #a9a9b3,
+    /* NameProperty */ "py": #41b0f5,
+    /* NameTag */ "nt": #41b0f5,
+    /* NameVariable */ "nv": #41b0f5,
+    /* NameVariableClass */ "vc": #41b0f5,
+    /* NameVariableGlobal */ "vg": #41b0f5,
+    /* NameVariableInstance */ "vi": #41b0f5,
+    /* NameVariableMagic */ "vm": #41b0f5,
+    /* Literal */ "l": #2aa198,
+    /* LiteralDate */ "ld": #2aa198,
+    /* LiteralString */ "s": #8cc570,
+    /* LiteralStringAffix */ "sa": #8cc570,
+    /* LiteralStringBacktick */ "sb": #8cc570,
+    /* LiteralStringChar */ "sc": #8cc570,
+    /* LiteralStringDelimiter */ "dl": #8cc570,
+    /* LiteralStringDoc */ "sd": #8cc570,
+    /* LiteralStringDouble */ "s2": #8cc570,
+    /* LiteralStringEscape */ "se": #8cc570,
+    /* LiteralStringHeredoc */ "sh": #8cc570,
+    /* LiteralStringInterpol */ "si": #8cc570,
+    /* LiteralStringOther */ "sx": #8cc570,
+    /* LiteralStringRegex */ "sr": #8cc570,
+    /* LiteralStringSingle */ "s1": #8cc570,
+    /* LiteralStringSymbol */ "ss": #8cc570,
+    /* LiteralNumber */ "m": #db985c,
+    /* LiteralNumberBin */ "mb": #db985c,
+    /* LiteralNumberFloat */ "mf": #db985c,
+    /* LiteralNumberHex */ "mh": #db985c,
+    /* LiteralNumberInteger */ "mi": #db985c,
+    /* LiteralNumberIntegerLong */ "il": #db985c,
+    /* LiteralNumberOct */ "mo": #db985c,
+    /* Operator */ "o": #ecbf6f,
+    /* OperatorWord */ "ow": #d371e3,
+    /* Comment */ "c": #7e848f,
+    /* CommentHashbang */ "ch": #7e848f,
+    /* CommentMultiline */ "cm": #7e848f,
+    /* CommentSingle */ "c1": #7e848f,
+    /* CommentSpecial */ "cs": #7e848f,
+    /* CommentPreproc */ "cp": #7e848f,
+    /* CommentPreprocFile */ "cpf": #7e848f,
+    /* Generic */ "g": #f16372,
+    /* GenericDeleted */ "gd": #f16372,
+    /* GenericEmph */ "ge": #f16372,
+    /* GenericError */ "gr": #f16372,
+    /* GenericHeading */ "gh": #f16372,
+    /* GenericInserted */ "gi": #f16372,
+    /* GenericOutput */ "go": #f16372,
+    /* GenericPrompt */ "gp": #f16372,
+    /* GenericStrong */ "gs": #f16372,
+    /* GenericSubheading */ "gu": #f16372,
+    /* GenericTraceback */ "gt": #f16372,
+    /* TextWhitespace */ "w": #bbbbbb
+);
+// ========== Code ========== //
+
+// color of bold text
+.single {
+    .content {
+        b,
+        strong {
+            [theme="dark"] & {
+                color: #e9ebfc !important;
+            }
+        }
+    }
+}

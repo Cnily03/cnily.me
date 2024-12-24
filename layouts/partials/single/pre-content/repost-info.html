@@ -1,0 +1,59 @@
+{{- $params := .Scratch.Get "params" -}}
+<div id="info-content-repost" class="admonition info open">
+    <div class="admonition-content"></div>
+</div>
+<script>
+    // Render repost information
+    (function () {
+        const s = document.getElementById("info-content-repost").children[0]
+        var select_code = "{{ .Site.Language.Lang }}"
+
+        // === CONFIG ===
+        /**
+         * Quote params in ${...} to auto render.
+         * Allowed params are as followings.
+         * - icon (Also allowed to use in 'repost-text')
+         * - link
+         */
+        const REPOST_LINK_TRANSLATION = {
+            "en": "This content is probably a repost [[${icon} Original Site]](${link})",
+            "zh-cn": "当前内容或转载自其它网页 [[${icon} 原文链接]](${link})"
+        }
+        FALLBACK_LANG = "zh-cn"
+        // === END ===
+
+        const REPOST = {
+            link: '{{ index $params "repost-link" }}'.trim(),
+            text: '{{ index $params "repost-text" }}'.trim()
+        }
+        const ICON_HTML = '<i class="fas fa-link"></i>'
+        function parseMarkDownLink(str) {
+            var subs = str.match(/(\[\[.*?\]\]|\[.*?\])\(.*?\)/g) || []
+            for (const sub of subs) {
+                sub.match(/(\[\[.*?\]\]|\[.*?\])\((.*?)\)/)[0]
+                var text = RegExp.$1
+                var isFloatRight = text.length >= 4 && text[0] == '[' && text[1] == '[' && text[text.length - 2] == ']' && text[text.length - 1] == ']'
+                text = isFloatRight ? text.substring(2, text.length - 2) : text.substring(1, text.length - 1)
+                var link = RegExp.$2
+                str = str.replace(sub,
+                    `<a ${isFloatRight ? 'class="float-right color-only"' : ''} href="${link}" target="_blank" rel="noopener noreferrer">${text}</a>`)
+            }
+            return str
+        }
+
+        var render_text = REPOST.text ?
+            // repost-text
+            parseMarkDownLink(REPOST.text)
+                .replace(/\$\{ *icon *\}/g, ICON_HTML)
+                .replace(/\r?\n/g, "<br>") :
+            // repos-link
+            parseMarkDownLink(REPOST_LINK_TRANSLATION[select_code || FALLBACK_LANG])
+                .replace(/\$\{ *icon *\}/g, ICON_HTML)
+                .replace(/\$\{ *link *\}/g, REPOST.link)
+                .replace(/\r?\n/g, "<br>")
+        s.innerHTML = render_text
+
+        // remove <script> tag
+        document.getElementById("info-content-repost").nextElementSibling.remove()
+    })()
+</script>
