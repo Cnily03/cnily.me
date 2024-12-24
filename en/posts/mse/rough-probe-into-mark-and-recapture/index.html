@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>标志重捕法部分问题探究 - Cnily03&#39;s Playground</title><meta name="Description" content="Cnily03 的个人博客"><meta property="og:title" content="标志重捕法部分问题探究" />
+<meta property="og:description" content="本文复现了标志重捕法的证明，系统探讨了标志重捕法在实际实验中的误差情况。本文着重研究了不同网眼大小的渔网对统计鱼的种群密度的影响。本文简要介绍了另一种更精确的标志重捕法 Schnabel method." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-02T02:50:13+08:00" />
+<meta property="article:modified_time" content="2023-02-07T23:24:28+08:00" /><meta property="og:site_name" content="Cnily03&#39;s Playground" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="标志重捕法部分问题探究"/>
+<meta name="twitter:description" content="本文复现了标志重捕法的证明，系统探讨了标志重捕法在实际实验中的误差情况。本文着重研究了不同网眼大小的渔网对统计鱼的种群密度的影响。本文简要介绍了另一种更精确的标志重捕法 Schnabel method."/>
+<meta name="application-name" content="Cnily03&#39;s Playground">
+<meta name="apple-mobile-web-app-title" content="Cnily03&#39;s Playground">
+
+<meta name="theme-color" content="#f8f8f8"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/" /><link rel="prev" href="https://cnily.me/en/posts/wenyan/changjin-fu/" /><link rel="next" href="https://cnily.me/en/posts/hss/what-ruins-i-wanna-say-thank-you/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "标志重捕法部分问题探究",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cnily.me\/en\/posts\/mse\/rough-probe-into-mark-and-recapture\/"
+        },"genre": "posts","keywords": "学术, 生物, 标志重捕法","wordcount":  6093 ,
+        "url": "https:\/\/cnily.me\/en\/posts\/mse\/rough-probe-into-mark-and-recapture\/","datePublished": "2022-01-02T02:50:13+08:00","dateModified": "2023-02-07T23:24:28+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "Cnily03"                    
+                    }],"description": ""
+    }
+    </script><link rel="stylesheet" href="https://cnily.me/v/css/common.css">
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/title2tooltip.js" defer></script>
+        
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/redirect.js"></script>
+        
+        
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark');}
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/en/"><span class="header-title-pre"><i class='cc cc-jw-bold' style='margin-right: .5rem'></i></span><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/en/posts/"> Posts </a><a class="menu-item" href="/en/categories/"> Categories </a><a class="menu-item" href="/en/series/"> Series </a><a class="menu-item" href="/en/tags/"> Tags </a><a class="menu-item" href="/en/window/"> Window </a><a class="menu-item" href="/en/friends/"> Friends </a><a class="menu-item" href="https://b.cnily.me" title="Yuque" rel="noopener noreferrer" target="_blank"><span id="renew-redirect"></span><b>Yuque</b>  </a><a class="menu-item" href="https://github.com/Cnily03/cnily.me" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="#" onclick="return false;" class="menu-item language" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/en/posts/mse/rough-probe-into-mark-and-recapture/" selected>English</option><option value="/posts/mse/rough-probe-into-mark-and-recapture/">简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/en/"><span class="header-title-pre"><i class='cc cc-jw-bold' style='margin-right: .5rem'></i></span><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" onclick="return false;" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" onclick="return false;" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" onclick="return false;" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/en/posts/" title="">Posts</a><a class="menu-item" href="/en/categories/" title="">Categories</a><a class="menu-item" href="/en/series/" title="">Series</a><a class="menu-item" href="/en/tags/" title="">Tags</a><a class="menu-item" href="/en/window/" title="">Window</a><a class="menu-item" href="/en/friends/" title="">Friends</a><a class="menu-item" href="https://b.cnily.me" title="Yuque" rel="noopener noreferrer" target="_blank"><span id="renew-redirect"></span><b>Yuque</b></a><a class="menu-item" href="https://github.com/Cnily03/cnily.me" title="GitHub" rel="noopener noreferrer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="#" onclick="return false;" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="#" onclick="return false;" class="menu-item" title="Select Language">English<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/en/posts/mse/rough-probe-into-mark-and-recapture/" selected>English</option><option value="/posts/mse/rough-probe-into-mark-and-recapture/">简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container">
+        
+            <script type="text/javascript" src="https://cnily.me/third-parties/js/svg-inject.min.js"></script>
+        
+        
+<div class="toc" id="toc-auto">
+        <h2 class="toc-title">Contents</h2>
+        <div class="toc-content always-active" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一公式及简单的证明">一、公式及简单的证明</a></li>
+    <li><a href="#二实际操作中的误差分析">二、实际操作中的误差分析</a>
+      <ul>
+        <li><a href="#一被标志个体死亡">（一）被标志个体死亡</a></li>
+        <li><a href="#二新个体的出生和原有个体的死亡">（二）新个体的出生和原有个体的死亡</a></li>
+        <li><a href="#三迁入和迁出">（三）迁入和迁出</a></li>
+        <li><a href="#四被标志个体未分布均匀">（四）被标志个体未分布均匀</a></li>
+        <li><a href="#五被标志个体难以被二次捕捉">（五）被标志个体难以被二次捕捉</a></li>
+        <li><a href="#六标志信息遗失">（六）标志信息遗失</a></li>
+        <li><a href="#七调查区域过小或过大">（七）调查区域过小或过大</a></li>
+      </ul>
+    </li>
+    <li><a href="#三标志重捕法的应用条件和注意事项">三、标志重捕法的应用条件和注意事项</a></li>
+    <li><a href="#四拓展施奈贝尔法">四、拓展：施奈贝尔法</a></li>
+    <li><a href="#五调查鱼的种群密度时使用不同网眼大小的渔网的影响">五、调查鱼的种群密度时使用不同网眼大小的渔网的影响</a>
+      <ul>
+        <li><a href="#一两次都用小网眼渔网">（一）两次都用小网眼渔网</a></li>
+        <li><a href="#二两次都用大网眼渔网">（二）两次都用大网眼渔网</a></li>
+        <li><a href="#三第一次用小网眼渔网第二次用大网眼渔网">（三）第一次用小网眼渔网，第二次用大网眼渔网</a></li>
+        <li><a href="#四第一次用大网眼渔网第二次用小网眼渔网">（四）第一次用大网眼渔网，第二次用小网眼渔网</a></li>
+        <li><a href="#五鱼群中大鱼和小鱼各自的种群密度">（五）鱼群中大鱼和小鱼各自的种群密度</a></li>
+        <li><a href="#六直观解释">（六）直观解释</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文献">参考文献</a></li>
+    <li><a href="#推荐阅读">推荐阅读</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("pageStyle", "normal")</script><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">标志重捕法部分问题探究</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='https://cnily.me/en/authors/cnily03'>Cnily03</a></span>
+                </span>&nbsp;<span class="post-category">included in </span>&nbsp;<span class="post-category">category <a href="/en/categories/%E6%95%B0%E7%90%86%E7%A7%91%E5%AD%A6/"><i class="far fa-folder fa-fw"></i>数理科学</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-02">2022-01-02</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-02-07">2023-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;6093 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一公式及简单的证明">一、公式及简单的证明</a></li>
+    <li><a href="#二实际操作中的误差分析">二、实际操作中的误差分析</a>
+      <ul>
+        <li><a href="#一被标志个体死亡">（一）被标志个体死亡</a></li>
+        <li><a href="#二新个体的出生和原有个体的死亡">（二）新个体的出生和原有个体的死亡</a></li>
+        <li><a href="#三迁入和迁出">（三）迁入和迁出</a></li>
+        <li><a href="#四被标志个体未分布均匀">（四）被标志个体未分布均匀</a></li>
+        <li><a href="#五被标志个体难以被二次捕捉">（五）被标志个体难以被二次捕捉</a></li>
+        <li><a href="#六标志信息遗失">（六）标志信息遗失</a></li>
+        <li><a href="#七调查区域过小或过大">（七）调查区域过小或过大</a></li>
+      </ul>
+    </li>
+    <li><a href="#三标志重捕法的应用条件和注意事项">三、标志重捕法的应用条件和注意事项</a></li>
+    <li><a href="#四拓展施奈贝尔法">四、拓展：施奈贝尔法</a></li>
+    <li><a href="#五调查鱼的种群密度时使用不同网眼大小的渔网的影响">五、调查鱼的种群密度时使用不同网眼大小的渔网的影响</a>
+      <ul>
+        <li><a href="#一两次都用小网眼渔网">（一）两次都用小网眼渔网</a></li>
+        <li><a href="#二两次都用大网眼渔网">（二）两次都用大网眼渔网</a></li>
+        <li><a href="#三第一次用小网眼渔网第二次用大网眼渔网">（三）第一次用小网眼渔网，第二次用大网眼渔网</a></li>
+        <li><a href="#四第一次用大网眼渔网第二次用小网眼渔网">（四）第一次用大网眼渔网，第二次用小网眼渔网</a></li>
+        <li><a href="#五鱼群中大鱼和小鱼各自的种群密度">（五）鱼群中大鱼和小鱼各自的种群密度</a></li>
+        <li><a href="#六直观解释">（六）直观解释</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文献">参考文献</a></li>
+    <li><a href="#推荐阅读">推荐阅读</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="pre-content"><div id="warn-not-translated" class="admonition warning open">
+    <div class="admonition-content"></div>
+</div>
+<script>
+    
+    (function () {
+        const s = document.getElementById("warn-not-translated").children[0]
+
+        
+        
+
+        const TRANSLATION = {
+            "en": "The content you are now visiting may haven't been translated to <b>${lang}</b>",
+            "zh-cn": "您正在浏览的内容可能未被翻译为<b>${lang}</b>",
+        }
+        TRANSLATION.FALLBACK = "您正在浏览的内容可能未经过翻译\nThe content you are now visiting might hasn't been translated"
+        
+
+        var select_code = "en"
+        var select_name = "English"
+
+        var content = (TRANSLATION[select_code] || TRANSLATION.FALLBACK).replace(/\r?\n/g, "<br>")
+            .replace(/\$\{ *lang *\}/g, select_name)
+            .replace(/\$\{ *lang:name *\}/g, select_name)
+            .replace(/\$\{ *lang:code *\}/g, select_code)
+        s.innerHTML = content || TRANSLATION.FALLBACK.replace(/\r?\n/g, "<br>")
+
+        
+        document.getElementById("warn-not-translated").nextElementSibling.remove()
+    })()
+</script></div><div class="content func-margin-large" id="content"><div class="admonition note open">
+            <div class="admonition-content">文章写于高三上学期。以下内容适用于高考。本人不是生物竞赛生。内容仅供参考。</div>
+        </div>
+<div class="admonition note open">
+            <div class="admonition-content">感谢知乎用户 <a href="https://www.zhihu.com/people/ru-shi-83-16" target="_blank" rel="noopener noreferrer" class="color-only">@如诗</a> 对文中错误的指正。</div>
+        </div>
+<h2 id="一公式及简单的证明" class="headerLink">
+    <a href="#%e4%b8%80%e5%85%ac%e5%bc%8f%e5%8f%8a%e7%ae%80%e5%8d%95%e7%9a%84%e8%af%81%e6%98%8e" class="header-mark"></a>一、公式及简单的证明</h2><p>标志重捕法（Mark &amp; Recapture）的<strong>林可指数法（Lincoln index method, Lincoln-Peterson method）</strong>比值公式为​<em>（下列公式中的部分字母可能与高中生物教材中的不同）</em></p>
+<p>$$ \frac{M}{N}=\frac{R}{S} $$</p>
+<p>计算公式为</p>
+<p>$$ N=\frac{MS}{R} $$</p>
+<p>其中，$N$ 表示种群密度（population size），$M$ 表示第一次捕捉并标志的个体数量（animals marked and released），$S$ 表示第二次捕捉的个体数量（第二次的样本数，size of the sample on the second day），$R$ 表示第二次样本中被标志的个体数（重新被捕捉的个体数，animals recaptured on the second day）。</p>
+<p>注意，$N$ 为第一次采集样本前的种群密度，计算值为估算值（estimate）。</p>
+<p>公式很直观，如果硬要证明的话：</p>
+<p>设调查区域的面积为 $T$，调查物种为 A，A 物种的种群密度为 $N$，在均匀分布的前提下，则其分布的面密度为</p>
+<p>$$ \sigma=\frac{N}{T} $$</p>
+<p>第一次捕捉并标志了 $M$ 个 A 物种个体，在均匀分布前提下，放生后被标志个体的面密度为</p>
+<p>$$ \sigma_{\text{mark}}=\frac{M}{T} $$</p>
+<p>第二次捕捉了 $N$ 个A 物种个体，其中带有标志（重捕）的个体数为</p>
+<p>$$ R=\frac{S}{N}T\times\sigma_{\text{mark}}=\frac{MS}{N} $$</p>
+<p>显然有关系式</p>
+<p>$$ \frac{M}{N}=\frac{R}{S} $$</p>
+<p>证毕。</p>
+<h2 id="二实际操作中的误差分析" class="headerLink">
+    <a href="#%e4%ba%8c%e5%ae%9e%e9%99%85%e6%93%8d%e4%bd%9c%e4%b8%ad%e7%9a%84%e8%af%af%e5%b7%ae%e5%88%86%e6%9e%90" class="header-mark"></a>二、实际操作中的误差分析</h2><p>在实际操作中，标志重捕法得到的种群密度估算值往往比实际值大。</p>
+<p>以下是影响标志重捕法准确度和造成误差的因素分析。</p>
+<h3 id="一被标志个体死亡" class="headerLink">
+    <a href="#%e4%b8%80%e8%a2%ab%e6%a0%87%e5%bf%97%e4%b8%aa%e4%bd%93%e6%ad%bb%e4%ba%a1" class="header-mark"></a>（一）被标志个体死亡</h3><p>被标志个体死亡，会导致 $R$ 偏小，在 $M$ 和 $S$ 不变的情况下，种群密度估算值 $N$ 偏大。因此，在实验过程中，确保捕捉、标志方法对该物种个体的安全性十分重要，可以尽最大程度减小被标志个体非自然死亡量。</p>
+<h3 id="二新个体的出生和原有个体的死亡" class="headerLink">
+    <a href="#%e4%ba%8c%e6%96%b0%e4%b8%aa%e4%bd%93%e7%9a%84%e5%87%ba%e7%94%9f%e5%92%8c%e5%8e%9f%e6%9c%89%e4%b8%aa%e4%bd%93%e7%9a%84%e6%ad%bb%e4%ba%a1" class="header-mark"></a>（二）新个体的出生和原有个体的死亡</h3><p>由于计算得到是第一次采集样本前的种群密度，所以在开始实验后至第二次采集样本的时间段内，任何的种群数量波动，都会影响到实验结果的准确度。</p>
+<p>由于出生的新个体不带有标志，新个体的出生将会导致标志个体被稀释，$R$ 与 $S$ 的比值将会减小，则种群密度估算值 $N$ 偏大。</p>
+<p>不考虑被标志个体由于第一次被捕捉而死亡、新个体的出生和其它因素的影响，并且调查区域、种群密度较大，分布均匀，倘若原有个体的死亡对种群内每一个体的机会相等，$R$ 与 $S$ 的比值将在理论上保持不变。但出于种种原因，往往他们的机会是不相等的，如果被标志个体的死亡比例比未被标志个体的死亡比例大，在全局看来等同于（一）的情况；如果被标志个体的死亡比例比未被标志个体的死亡比例小，在全局看来相当于仅有未被标志个体死亡，即被标志个体被浓缩，$R$ 与 $S$ 的比值将会偏大，则种群密度估算值 $N$ 偏小。</p>
+<p>在种群中，个体的出生和死亡往往独立进行，即使原有个体的死亡对种群内每一个体的机会相等，新个体的出生依然会稀释被标志个体，种群密度估算值 $N$ 往往偏大。</p>
+<h3 id="三迁入和迁出" class="headerLink">
+    <a href="#%e4%b8%89%e8%bf%81%e5%85%a5%e5%92%8c%e8%bf%81%e5%87%ba" class="header-mark"></a>（三）迁入和迁出</h3><p>种群个体在调查区域内的迁入和迁出是普遍的，并对种群密度产生影响。</p>
+<p>假设没有迁入，且净表现为被标志个体迁出，即种群内被标志个体迁出比例大于未被标志个体，在调查区域内标志个体被稀释，种群密度估算值 $N$ 偏大；净表现为未被标志个体迁出，即种群内被标志个体迁出比例小于未被标志个体，在调查区域内标志个体被浓缩，种群密度估算值 $N$ 偏小。</p>
+<p>迁入和迁出往往是同时进行的，即使原种群中每个个体的迁出机会相等，新的迁入依然会导致被标志个体被稀释。因此，只要迁入不等于 $N$ ，则种群密度估算值 $N$ 偏大。</p>
+<h3 id="四被标志个体未分布均匀" class="headerLink">
+    <a href="#%e5%9b%9b%e8%a2%ab%e6%a0%87%e5%bf%97%e4%b8%aa%e4%bd%93%e6%9c%aa%e5%88%86%e5%b8%83%e5%9d%87%e5%8c%80" class="header-mark"></a>（四）被标志个体未分布均匀</h3><p>最理想的情况是所有个体分布均匀，所有被标志个体分布均匀。分布均匀需要一定的时间，这段时间即为第一次释放和第二次采样之间的时间间隔。如果这段时间过长，出生和死亡、迁入和迁出的影响将增大；如果这段时间过短，被标志个体未分布均匀，更多情况是大多数被标志个体仍在第一次释放地点周边。在这种情况下，如果第二次采样与第一次采样地点相同，则重捕的标志个体 $R$ 值相对于理想值偏大，种群密度估算值 $N$ 偏小；如果第二次采样与第一次采样地点相隔甚远，则重捕的被标志个体 $R$ 值相对于理想值偏小，种群密度估算值 $N$ 偏大。</p>
+<p>即使不考虑以上因素，但由于第一次被标志的个体之间诸如家庭、朋友的关系，被标志后这些个体或仍然聚集未分散，这对分布均匀是极其不利的，重捕时更大的可能是都重捕到或都未被重捕。</p>
+<p>因此选择合适的采样地点、确定两次采样的时间间隔是极其重要的。</p>
+<h3 id="五被标志个体难以被二次捕捉" class="headerLink">
+    <a href="#%e4%ba%94%e8%a2%ab%e6%a0%87%e5%bf%97%e4%b8%aa%e4%bd%93%e9%9a%be%e4%bb%a5%e8%a2%ab%e4%ba%8c%e6%ac%a1%e6%8d%95%e6%8d%89" class="header-mark"></a>（五）被标志个体难以被二次捕捉</h3><p>这很好理解，“同样的事情不会犯第二次”“吃一堑，长一智”，调查的动物或多或少也是如此，因此第一次被标志的个体在第二次采样时难以捕捉，这将使 $R$ 的值相对于理想值偏小，种群密度估算值 $N$ 偏大。</p>
+<h3 id="六标志信息遗失" class="headerLink">
+    <a href="#%e5%85%ad%e6%a0%87%e5%bf%97%e4%bf%a1%e6%81%af%e9%81%97%e5%a4%b1" class="header-mark"></a>（六）标志信息遗失</h3><p>此类情况也是时常发生的、较为普遍的。由于动物脱毛、标志物掉落等诸多原因，都会导致原有被标志个体标志信息遗失，这将使重捕的被标志个体 $R$ 值相对于正常值偏小，种群群密度估算值 $N$ 偏大。</p>
+<p>因此，选择合适的标志方法或标志物同样重要，并尽可能不伤害被标志的个体。</p>
+<h3 id="七调查区域过小或过大" class="headerLink">
+    <a href="#%e4%b8%83%e8%b0%83%e6%9f%a5%e5%8c%ba%e5%9f%9f%e8%bf%87%e5%b0%8f%e6%88%96%e8%bf%87%e5%a4%a7" class="header-mark"></a>（七）调查区域过小或过大</h3><p>调查区域过小对种群密度的影响是不确定的，偶然性太大，实验结果不可靠。标志重捕法的公式依赖于统计结果，因此大的样本容量也至关重要，但是如果调查区域过大，会导致种群密度估算值 $N$ 偏小。这是由于被标志个体的数量相较于大的种群中种群个体总数是极小的，所以被标志个体难以分散。即使被标志个体完全均匀分布了，第二次采样时 $R$ 的值也会很小，这对实验的误差往往是成倍的。</p>
+<p>可以举一个形象的例子，如果使用标志重捕法调查全国乃至全球的种群密度，如果仅在一个地区采样，显然是荒谬的。</p>
+<p>因此，在每个阶段只采样一次的前提下，调查区域大小的确定也应慎重。</p>
+<h2 id="三标志重捕法的应用条件和注意事项" class="headerLink">
+    <a href="#%e4%b8%89%e6%a0%87%e5%bf%97%e9%87%8d%e6%8d%95%e6%b3%95%e7%9a%84%e5%ba%94%e7%94%a8%e6%9d%a1%e4%bb%b6%e5%92%8c%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" class="header-mark"></a>三、标志重捕法的应用条件和注意事项</h2><p>通过以上分析，我们大致可以归纳得到标志重捕法的应用条件以及实际操作时的注意事项：</p>
+<ol>
+<li>调查种群内个体要有一定的移动能力。</li>
+<li>标志方法必须对被标志个体的身体不产生生命、行动等影响实验的重大方面的威胁或伤害。</li>
+<li>标志物不能过分醒目，以影响被标志个体与未被标志个体间的信息交流。</li>
+<li>标志信息必须在实验期间不消失。</li>
+<li>重捕需要间隔一段时间，以使被标志个体在种群中混匀。</li>
+<li>标志重捕法受多种因素影响，因此需要进行多次重复试验，取平均值。</li>
+</ol>
+<h2 id="四拓展施奈贝尔法" class="headerLink">
+    <a href="#%e5%9b%9b%e6%8b%93%e5%b1%95%e6%96%bd%e5%a5%88%e8%b4%9d%e5%b0%94%e6%b3%95" class="header-mark"></a>四、拓展：施奈贝尔法</h2><p><strong>施奈贝尔法（Schnabel method）</strong>也是标志重捕法的方法之一。调查时进行多次采样和标志，在一定程度上可以减小误差。<em>（此处的施奈贝尔法公式可能与国内文献有出入。）</em></p>
+<p>$$ N=\frac{\sum\limits_{i=1}^{m}M_{i}C_{i}}{\sum\limits_{i=1}^{m}R_{i}} $$</p>
+<p>其中，$M_i$ 表示第 $i$ 次采样前，种群中已标志个体总数；$C_i$ 表示第 $i$ 次采样时，捕获并且即将被标志的个体总数；$R_i$ 表示第 $i$ 次采样时，捕获动物中已标志个体的总数；$m$ 表示采样总次数。</p>
+<p><strong>示例：</strong></p>
+<ol>
+<li>第 $i=1$ 次捕捉了 $C_1=32$ 只动物（此前种群中没有被标志个体，$M_1=0$），并对其全部标志，记 $R_1=0$，放生；</li>
+<li>第 $i=2$ 次捕捉了 $C_2=54$ 只动物（此前种群中已被标志个体总数为 $M_2=32$），其中有 $R_2=18$ 只已被标志，并对其未标志个体的 $36$ 只动物全部标志，放生；</li>
+<li>第 $i=3$ 次捕捉了 $C_3=37$ 只动物（此前种群中已被标志个体总数为 $M_3=32+36=68$），其中有 $R_3=31$ 只已经被标志，并对其未标志个体的 $6$ 只动物全部标志，放生；</li>
+<li>第 $i=4$ 次捕捉了 $C_4=60$ 只动物（此前种群中已被标志个体总数为 $M_4=68+6=74$），其中有 $R_4=47$ 只已经被标志，并对其未标志个体的 $13$ 只动物全部标志，放生；</li>
+<li>第 $i=5$ 次捕捉了 $C_5=41$ 只动物（此前种群中已被标志个体总数为 $M_5=74+13=87$），其中有 $R_5=36$ 只已经被标志。</li>
+<li>实验结束。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">$\bm{i}$</th>
+<th style="text-align:center">$\bm{C_i}$</th>
+<th style="text-align:center">$\bm{R_i}$</th>
+<th style="text-align:center">新标志个体数</th>
+<th style="text-align:center">$\bm{M_i}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$1$</td>
+<td style="text-align:center">$32$</td>
+<td style="text-align:center">$0$</td>
+<td style="text-align:center">$32$</td>
+<td style="text-align:center">$0$</td>
+</tr>
+<tr>
+<td style="text-align:center">$2$</td>
+<td style="text-align:center">$54$</td>
+<td style="text-align:center">$18$</td>
+<td style="text-align:center">$36$</td>
+<td style="text-align:center">$32$</td>
+</tr>
+<tr>
+<td style="text-align:center">$3$</td>
+<td style="text-align:center">$37$</td>
+<td style="text-align:center">$31$</td>
+<td style="text-align:center">$6$</td>
+<td style="text-align:center">$68$</td>
+</tr>
+<tr>
+<td style="text-align:center">$4$</td>
+<td style="text-align:center">$60$</td>
+<td style="text-align:center">$47$</td>
+<td style="text-align:center">$13$</td>
+<td style="text-align:center">$74$</td>
+</tr>
+<tr>
+<td style="text-align:center">$5$</td>
+<td style="text-align:center">$41$</td>
+<td style="text-align:center">$36$</td>
+<td style="text-align:center">$(5)$</td>
+<td style="text-align:center">$87$</td>
+</tr>
+</tbody>
+</table>
+<p>根据计算得到种群密度</p>
+<p>$$N=\frac{32\times 0+54\times 32+37\times 68+60\times 74+41\times 87}{0+18+31+47+36}=\frac{12251}{132}=92.81\approx93 $$</p>
+<h2 id="五调查鱼的种群密度时使用不同网眼大小的渔网的影响" class="headerLink">
+    <a href="#%e4%ba%94%e8%b0%83%e6%9f%a5%e9%b1%bc%e7%9a%84%e7%a7%8d%e7%be%a4%e5%af%86%e5%ba%a6%e6%97%b6%e4%bd%bf%e7%94%a8%e4%b8%8d%e5%90%8c%e7%bd%91%e7%9c%bc%e5%a4%a7%e5%b0%8f%e7%9a%84%e6%b8%94%e7%bd%91%e7%9a%84%e5%bd%b1%e5%93%8d" class="header-mark"></a>五、调查鱼的种群密度时使用不同网眼大小的渔网的影响</h2><p>只有两次都用大网眼渔网是偏小的，其它情况的理论值均等于种群密度实际值。下面给出证明。</p>
+<h3 id="一两次都用小网眼渔网" class="headerLink">
+    <a href="#%e4%b8%80%e4%b8%a4%e6%ac%a1%e9%83%bd%e7%94%a8%e5%b0%8f%e7%bd%91%e7%9c%bc%e6%b8%94%e7%bd%91" class="header-mark"></a>（一）两次都用小网眼渔网</h3><p>由于小网眼可以同时捕大鱼和小鱼，所以<u>两次都用小网眼捕鱼的计算值为调查范围内该鱼的种群密度的估算值</u>。</p>
+<h3 id="二两次都用大网眼渔网" class="headerLink">
+    <a href="#%e4%ba%8c%e4%b8%a4%e6%ac%a1%e9%83%bd%e7%94%a8%e5%a4%a7%e7%bd%91%e7%9c%bc%e6%b8%94%e7%bd%91" class="header-mark"></a>（二）两次都用大网眼渔网</h3><p>大网眼只能捕大鱼，因此，不妨将大鱼和小鱼分别看作一个“物种”，调查的即是大鱼的种群密度。所以<u>两次都用大网眼捕鱼的计算值为调查范围内该种鱼中大鱼的种群密度的估算值，计算值相较于该鱼（包括大鱼和小鱼）的种群密度偏小</u>。</p>
+<h3 id="三第一次用小网眼渔网第二次用大网眼渔网" class="headerLink">
+    <a href="#%e4%b8%89%e7%ac%ac%e4%b8%80%e6%ac%a1%e7%94%a8%e5%b0%8f%e7%bd%91%e7%9c%bc%e6%b8%94%e7%bd%91%e7%ac%ac%e4%ba%8c%e6%ac%a1%e7%94%a8%e5%a4%a7%e7%bd%91%e7%9c%bc%e6%b8%94%e7%bd%91" class="header-mark"></a>（三）第一次用小网眼渔网，第二次用大网眼渔网</h3><p>设调查区与体积为 $V$，鱼的分布体密度为 $\rho$，其中大鱼的分布体密度为 $\rho_{\text{大}}$，小鱼的分布体密度为 $\rho_{\text{小}}$。</p>
+<p>设种群密度为 $N$ ，计算值为 $N^{\prime}$，则有 $N=\rho V$。</p>
+<p>假定任何调查时刻前鱼在调查区域内分布均匀。</p>
+<p>第一次用小网眼捕鱼，捕到鱼 $M$ 只，有大鱼和小鱼，对其全部标志并放生。此时，被标志鱼中大鱼的分布体密度</p>
+<p>$$ \rho_{\text{大}}^{\prime}=\frac{1}{V}\times M\frac{\rho_{\text{大}}}{\rho}=\frac{M\rho_{\text{大}}}{V\rho} $$</p>
+<p>同理也可以得到被标志小鱼的分布体密度。</p>
+<p>第二次用大网眼捕鱼，补到鱼 $S$ 只，皆为大鱼。标志鱼的数量。</p>
+<p>$$ R=\rho_{\text{大}}^{\prime}\frac{S}{\rho}=S\frac{M}{N} $$</p>
+<p>根据计算公式得，计算值</p>
+<p>$$ N^{\prime}=\frac{MS}{R}=N $$</p>
+<p>由此可以得到结论：<u>调查鱼的种群密度时，第一次用小网眼渔网，第二次用大网眼渔网，理论值等于种群密度。</u></p>
+<h3 id="四第一次用大网眼渔网第二次用小网眼渔网" class="headerLink">
+    <a href="#%e5%9b%9b%e7%ac%ac%e4%b8%80%e6%ac%a1%e7%94%a8%e5%a4%a7%e7%bd%91%e7%9c%bc%e6%b8%94%e7%bd%91%e7%ac%ac%e4%ba%8c%e6%ac%a1%e7%94%a8%e5%b0%8f%e7%bd%91%e7%9c%bc%e6%b8%94%e7%bd%91" class="header-mark"></a>（四）第一次用大网眼渔网，第二次用小网眼渔网</h3><p>设调查区域与体积为 $V$，鱼的分布体密度为 $\rho$，其中大鱼的分布体密度为 $\rho_{\text{大}}$ ，小鱼的分布体密度为 $\rho_{\text{小}}$。</p>
+<p>设种群密度为 $N$，计算值为 $N^{\prime}$，则有 $N=\rho V$。</p>
+<p>假定任何调查时刻前鱼在调查区域内分布均匀。</p>
+<p>第一次用大网眼捕鱼，捕到鱼 $M$ 只，皆为大鱼，对其全部标志并放生。此时，被标志大鱼的分布体密度</p>
+<p>$$ \rho_{\text{大}}^{\prime}=\frac{M}{V}=\rho\frac{M}{N} $$</p>
+<p>被标志小鱼的分布体密度 $\rho_{小}^{\prime}=0$。</p>
+<p>第二次用小网眼捕鱼，补到鱼 $S$ 只，有大鱼和小鱼。被标志鱼的数量</p>
+<p>$$ R=\left(\rho_{\text{小}}^{\prime}+\rho_{\text{大}}^{\prime}\right)\frac{S}{\rho}=S\frac{M}{N} $$</p>
+<p>根据计算公式得，计算值</p>
+<p>$$ N^{\prime}=\frac{MS}{R}=N $$</p>
+<p>由此可以得到结论：<u>调查鱼的种群密度时，第一次用大网眼渔网，第二次用小网眼渔网，理论值等于种群密度。</u></p>
+<h3 id="五鱼群中大鱼和小鱼各自的种群密度" class="headerLink">
+    <a href="#%e4%ba%94%e9%b1%bc%e7%be%a4%e4%b8%ad%e5%a4%a7%e9%b1%bc%e5%92%8c%e5%b0%8f%e9%b1%bc%e5%90%84%e8%87%aa%e7%9a%84%e7%a7%8d%e7%be%a4%e5%af%86%e5%ba%a6" class="header-mark"></a>（五）鱼群中大鱼和小鱼各自的种群密度</h3><p>有人可能会疑惑：在<a href="#%e4%ba%8c%e6%96%b0%e4%b8%aa%e4%bd%93%e7%9a%84%e5%87%ba%e7%94%9f%e5%92%8c%e5%8e%9f%e6%9c%89%e4%b8%aa%e4%bd%93%e7%9a%84%e6%ad%bb%e4%ba%a1" rel="" class="obscure">（二）</a>中，把大鱼看作一个“物种”，那么当第一次大网眼、第二次用小网眼时，岂不是第一次的测量就默认目的为估算大鱼的种群密度，怎么还能得出准确值呢？而当第一次小网眼、第二次用大网眼时，却不能将大鱼“单独化”，又怎么得出准确值呢？</p>
+<p>事实上，当第一次大网眼、第二次用小网眼时，如果把目的改为估算大鱼的种群密度，那么在第二次使用小网眼时，虽然重捕的都是大鱼，但是由于鱼类总量增加，即公式中的 $S$ 偏大，根据公式，大鱼的种群密度 $N$ 也偏大。通过上述计算我们已经知道，偏大的值即为该鱼（包括大鱼和小鱼）的种群密度，当然大于大鱼的种群密度。</p>
+<p>对于第二个疑惑，参见：<a href="#%e5%85%ad%e7%9b%b4%e8%a7%82%e8%a7%a3%e9%87%8a" rel="" class="obscure underlined">（六）直观解释</a>。</p>
+<p>如果在第二次捞鱼网（小网眼）后，数出其中小鱼的数量 $S_{\text{小}}$，那么除了得到该鱼（包括大鱼和小鱼）的种群密度还可以分别得到该鱼种群中大鱼和小鱼各自的种群密度。</p>
+<p>大鱼的种群密度</p>
+<p>$$ N_{\text{大}}=\frac{M\left(S-S_{\text{小}}\right)}{R} $$</p>
+<p>小鱼的种群密度</p>
+<p>$$ N_{\text{小}}=N-N_{\text{大}}=\frac{MS_{\text{小}}}{R} $$</p>
+<p>在小鱼的种群密度公式中，由于 $R$ 代表被标志的大鱼，$S_{小}$ 代表小鱼，所以该公式没有物理意义，只是计算所得的结果。</p>
+<p>同理，当第一次小网眼、第二次用大网眼时，如果在第一次捞鱼网（小网眼）后，数出其中小鱼的数量 $M_{小}$，那么除了得到该鱼（包括大鱼和小鱼）的种群密度，还可以分别得到该鱼种群中大鱼和小鱼各自的种群密度。</p>
+<p>大鱼的种群密度</p>
+<p>$$ N_{\text{大}}=\frac{\left(M-M_{\text{小}}\right)S}{R} $$</p>
+<p>小鱼的种群密度</p>
+<p>$$ N_{\text{小}}=N-N_{\text{大}}=\frac{M_{\text{小}}S}{R} $$</p>
+<p>同样，在小鱼的种群密度公式中，由于 $R$ 代表被标志的大鱼，$S_{小}$ 代表小鱼，所以该公式也没有物理意义，只是计算所得的结果。</p>
+<h3 id="六直观解释" class="headerLink">
+    <a href="#%e5%85%ad%e7%9b%b4%e8%a7%82%e8%a7%a3%e9%87%8a" class="header-mark"></a>（六）直观解释</h3><p>如果刚开始听到结论，可能会有人想不通：为何这种“操作失误”最终却不会导致结果错误呢？</p>
+<p>通过观察结论，我们可以发现，<strong>凡是出现使用小网眼渔网</strong>，或是说<strong>实验过程中只要有一个记录数值包括了大鱼和小鱼两者</strong>，那么<strong>结果就是整个鱼种群的种群密度</strong>。</p>
+<p>事实上，观察第一次用大网眼渔网，第二次用小网眼渔网时的种群密度比值公式</p>
+<p>$$ \frac{M}{N}=\frac{R}{S} $$</p>
+<p>可以发现，$M$、$R$ 数值只包括大鱼的数值，$S$ 数值却包括大鱼和小鱼。</p>
+<p>由于预先假定了鱼群在调查区域内分布均匀，所以可设 $M_{\text{小}}$、$R_{\text{小}}$ 分别为相较于大鱼，相同比例小鱼标志量和小鱼重捕量，即</p>
+<p>$$ \frac{M_{\text{大}}}{R_{\text{大}}}=\frac{M_{\text{小}}}{R_{\text{小}}} $$</p>
+<p>则根据等比定理，有</p>
+<p>$$ \frac{M_{\text{大}}}{R_{\text{大}}}=\frac{M_{\text{大}}+M_{\text{小}}}{R_{\text{大}}+R_{\text{小}}}=\frac{M_{\text{总}}}{R_{\text{总}}}=\frac{N}{S_{\text{总}}} $$</p>
+<p>即</p>
+<p>$$ \frac{M_{\text{总}}}{N}=\frac{R_{\text{总}}}{S_{\text{总}}} $$</p>
+<p>显然该表达式还原了两次都用小网眼渔网的情况，则</p>
+<p>$$ N=N_{\text{总}} $$</p>
+<p>同理，若第一次用小网眼渔网，第二次用大网眼渔网，那么公式中的 $S$、$R$ 数值只包括大鱼的数值，$M$ 数值却包括大鱼和小鱼。设 $M_{\text{小}}$、$N_{\text{小}}$ 为相较于大鱼，相同比例的小鱼表质量和种群密度，亦可以通过以上等比说明：</p>
+<p>$$ \frac{R_{\text{大}}}{S_{\text{大}}}=\frac{M_{\text{大}}}{N_{大}}=\frac{M_{\text{大}}+M_{\text{小}}}{N_{\text{大}}+N_{\text{小}}}=\frac{M_{\text{总}}}{N} $$</p>
+<p>显然</p>
+<p>$$ N=N_{\text{总}} $$</p>
+<hr>
+<h2 id="参考文献" class="headerLink">
+    <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" class="header-mark"></a>参考文献</h2><p>Anonymous. <a href="https://www.deanza.edu/faculty/heyerbruce/b6c_pdf/3b_Estimating%20Population%20Size.pdf" target="_blank" rel="noopener noreferrer" class="obscure underlined">Estimating Population Size: Mark-Recapture</a>[DB/OL]. <a href="https://www.deanza.edu/faculty/heyerbruce/b6c_pdf/3b_Estimating%20Population%20Size.pdf" target="_blank" rel="noopener noreferrer">https://www.deanza.edu/faculty/heyerbruce/b6c_pdf/3b_Estimating%20Population%20Size.pdf</a>, 2018-4-24.</p>
+<p>刘毅, 周伟香, 赵沛荣. 高中生物学学生读本[M]. 浙江: 浙江大学出版社, 2013: 199.</p>
+<p>Alcoy, Juan Carlos Olmos. <a href="https://www.academia.edu/65455143/The_Schnabel_Method_An_Ecological_Approach_to_Productive_Vocabulary_Size_Estimation" target="_blank" rel="noopener noreferrer" class="obscure underlined">The Schnabel Method: An ecological approach to productive vocabulary size estimation</a>[J]. <em>International Proceedings of Economics Development and Research</em>, 2013, 68: 19-24.</p>
+<h2 id="推荐阅读" class="headerLink">
+    <a href="#%e6%8e%a8%e8%8d%90%e9%98%85%e8%af%bb" class="header-mark"></a>推荐阅读</h2><p>许献军. <a href="http://swxjx.ecnu.edu.cn/CN/Y2016/V41/I6/73" target="_blank" rel="noopener noreferrer" class="obscure underlined">网眼大小不同的渔网捕鱼对标志重捕法估算值的影响</a>[J]. 生物学教学, 2016, 41(6): 73-74.</p>
+</div>
+
+        <div class="sponsor">
+        <div class="sponsor-avatar"><img
+        
+        loading="lazy"
+        src="https://image.cnily.top/avatar.png?imageMogr2/format/webp"
+        srcset="https://image.cnily.top/avatar.png?imageMogr2/format/webp, https://image.cnily.top/avatar.png?imageMogr2/format/webp 1.5x, https://image.cnily.top/avatar.png?imageMogr2/format/webp 2x"
+        sizes="auto"
+        alt="https://image.cnily.top/avatar.png?imageMogr2/format/webp"title=""></div><p class="sponsor-bio"><em>如果你觉得这篇文章对你有所帮助，欢迎赞赏~</em></p><a href="https://space.bilibili.com/314148718" target="_blank" class="sponsor-button" rel="noopener noreferrer">
+                <i class="far fa-heart fa-fw icon" style="color: #ec6cb9;"></i>
+                <span>Sponsor</span>
+            </a></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-02-07</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/en/posts/mse/rough-probe-into-mark-and-recapture/index.md target="_blank" rel="noopener noreferrer">Read markdown</a>
+                    </span><span>|&nbsp;<a class="link-to-source" href=https://github.com/Cnily03/cnily.me/blob/master/content/posts/mse/rough-probe-into-mark-and-recapture.en.md?plain=1 target="_blank" rel="noopener noreferrer">View source</a>
+                    </span><span>|&nbsp;<a class="link-to-report" href=https://github.com/Cnily03/cnily.me/issues/new?labels=website,posts,bug&body=|Origin|File|%0A|-|-|%0A|[%E6%A0%87%E5%BF%97%E9%87%8D%E6%8D%95%E6%B3%95%E9%83%A8%E5%88%86%E9%97%AE%E9%A2%98%E6%8E%A2%E7%A9%B6](https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/)|[🔗Github](https://github.com/Cnily03/cnily.me/blob/master/content/posts/mse/rough-probe-into-mark-and-recapture.en.md?plain=1)|%0A--- target="_blank" rel="noopener noreferrer">Report issue</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="Share on Twitter" data-sharer="twitter" data-url="https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/" data-title="标志重捕法部分问题探究" data-hashtags="学术,生物,标志重捕法"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="Share on Facebook" data-sharer="facebook" data-url="https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/" data-hashtag="学术"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="Share on 微博" data-sharer="weibo" data-url="https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/" data-title="标志重捕法部分问题探究"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/en/tags/%E5%AD%A6%E6%9C%AF/">学术</a>,&nbsp;<a href="/en/tags/%E7%94%9F%E7%89%A9/">生物</a>,&nbsp;<a href="/en/tags/%E6%A0%87%E5%BF%97%E9%87%8D%E6%8D%95%E6%B3%95/">标志重捕法</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/en/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/en/posts/wenyan/changjin-fu/" class="prev" rel="prev" title="长津赋"><i class="fas fa-angle-left fa-fw"></i>长津赋</a>
+            <a href="/en/posts/hss/what-ruins-i-wanna-say-thank-you/" class="next" rel="next" title="是什么毁了《听我说谢谢你》">是什么毁了《听我说谢谢你》<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article><link rel="stylesheet" href="https://cnily.me/v/css/sponsor.css">
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/auto-indent.js"></script>
+        
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/sponsor.js"></script>
+        
+        
+</div>
+        </main><footer class="footer">
+        <style>.footer-split{margin:0 .5em}.footer-split::after{content:"|"}</style>
+        <div class="footer-container"><div class="footer-line">
+                    Powered by <span id='footer-engine'><a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a></span><span class="footer-split"></span>Theme - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.2.13"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/Cnily03" target="_blank" rel="noopener noreferrer">Cnily03</a></span><span class="footer-split"></span><span class="license"><a data-tooltip="License might be changed if particularly declared" class="tooltip" rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer>
+        
+            <script type="text/javascript" src="https://cnily.me/v/js/naughty-footer.js"></script>
+        
+        
+</div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" onclick="window.scroll(window.scrollX, 0); return !1;" id="back-to-top-button" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":20},"comment":{},"data":{"desktop-header-typeit":"Cnily03 Home","mobile-header-typeit":"Cnily03 Home"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/en/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"No results found","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":5000,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

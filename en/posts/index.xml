@@ -1,0 +1,68 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>All Posts - Cnily03&#39;s Playground</title>
+        <link>https://cnily.me/en/posts/</link>
+        <description>All Posts | Cnily03&#39;s Playground</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Nov 2022 18:41:26 &#43;0800</lastBuildDate><atom:link href="https://cnily.me/en/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>顾史说</title>
+    <link>https://cnily.me/en/posts/wenyan/gushi-shuo/</link>
+    <pubDate>Wed, 30 Nov 2022 18:41:26 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/wenyan/gushi-shuo/</guid>
+    <description><![CDATA[夫闻第千年以来，九土临有尧舜之芳躅、六飞之从骑，故土蒙罹黄河之决水、胡马之铁蹄。其尽万般而一族，历千患而同域，素不闻远洋之异肤，雅不识坤與之]]></description>
+</item><item>
+    <title>题解 - NewStar 2022 Week 5</title>
+    <link>https://cnily.me/en/posts/ctf/wp/2022/newstar-week5/</link>
+    <pubDate>Sun, 23 Oct 2022 09:43:12 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/ctf/wp/2022/newstar-week5/</guid>
+    <description><![CDATA[CRYPTO flip-flop题目中的关键代码如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 # 生成 authcode auth_pt = b&#39;NewStarCTFer____&#39; user_key = os.urandom(16) cipher = AES.new(auth_major_key, AES.MODE_CBC, user_key) code = cipher.encrypt(auth_pt) print(f&#39;here is your authcode: {user_key.hex() + code.hex()}&#39;) # 解码 authcode user_key = bytes.fromhex(authcode)[:16] code = bytes.fromhex(authcode)[16:] cipher]]></description>
+</item><item>
+    <title>Lifelong Bonus</title>
+    <link>https://cnily.me/en/posts/lifelong-bonus/</link>
+    <pubDate>Sat, 15 Oct 2022 17:18:41 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/lifelong-bonus/</guid>
+    <description><![CDATA[Related attachments (only for peresonal use or education) PowerPoint Document Following the rhythm in this era of rapid development, we have never questioned or pondered a roadway that we move forward from local to global, from school to college.
+The predefined life could never box someone in the frame of popularity, however, for there are always people who have their own novel ideas and try to achieve them. Maybe you think the rise of Microsoft and Alibaba has proved the insignificance of attending college, but facts show that opportunities and well-beings seldom blaze a trail for who lack college experience.]]></description>
+</item><item>
+    <title>观党史怀古二首</title>
+    <link>https://cnily.me/en/posts/wenyan/poetry/guandangshi-huaigu/</link>
+    <pubDate>Thu, 22 Sep 2022 21:31:00 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/wenyan/poetry/guandangshi-huaigu/</guid>
+    <description><![CDATA[其一：厦倾神器借天光，烈火播荃覆五洋。……其二：金瓯初日补霞光，共产德兴诩莽洋。……]]></description>
+</item><item>
+    <title>先怀来思赋</title>
+    <link>https://cnily.me/en/posts/wenyan/xianhuai-laisi-fu/</link>
+    <pubDate>Wed, 21 Sep 2022 22:33:57 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/wenyan/xianhuai-laisi-fu/</guid>
+    <description><![CDATA[凤下千仞，麒麟穆立。莺鸾从舞，乾元康泰。天子本然，女娲所降于乾坤；士气排然，刈钁所驰于田塍。夫党发轫于荆棘，斩虺于三界。淬水火而炼其钢，钟四海而聚其流。兢兢业业，盖建纲于工农之基；浩浩汤汤，故策勋于颓危之际。旦则并马列于尧舜，夕则骋雄狮于江河。旂旌震扬于华夏，貔貅复怒于神州。]]></description>
+</item><item>
+    <title>答Z20作文：浴身火海，御生火海</title>
+    <link>https://cnily.me/en/posts/hss/live-in-fire-save-in-flame/</link>
+    <pubDate>Sat, 28 May 2022 23:18:08 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/hss/live-in-fire-save-in-flame/</guid>
+    <description><![CDATA[中华民族向来有着悠久的“读书”历史，从刻录古代国人智慧的龟甲，到厚载文墨尺牍的纸张，记录着一代又一代读书人秉烛苦读的身影，承载着多少青年志士]]></description>
+</item><item>
+    <title>是什么毁了《听我说谢谢你》</title>
+    <link>https://cnily.me/en/posts/hss/what-ruins-i-wanna-say-thank-you/</link>
+    <pubDate>Fri, 29 Apr 2022 15:44:01 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/hss/what-ruins-i-wanna-say-thank-you/</guid>
+    <description><![CDATA[在当今时代，短视频势如破竹，成为互联网上不可忽视的流量巨头、转播媒介。近期，歌曲《听我说谢谢你》传遍全网，饱受诟责。不少网友在医护工作者面前]]></description>
+</item><item>
+    <title>标志重捕法部分问题探究</title>
+    <link>https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/</link>
+    <pubDate>Sun, 02 Jan 2022 02:50:13 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/mse/rough-probe-into-mark-and-recapture/</guid>
+    <description><![CDATA[本文复现了标志重捕法的证明，系统探讨了标志重捕法在实际实验中的误差情况。本文着重研究了不同网眼大小的渔网对统计鱼的种群密度的影响。本文简要介绍了另一种更精确的标志重捕法 Schnabel method.]]></description>
+</item><item>
+    <title>长津赋</title>
+    <link>https://cnily.me/en/posts/wenyan/changjin-fu/</link>
+    <pubDate>Wed, 13 Oct 2021 16:22:17 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/wenyan/changjin-fu/</guid>
+    <description><![CDATA[木枯云泣残烟散，日照水融故人空。]]></description>
+</item><item>
+    <title>浅析海明威《好狮子》</title>
+    <link>https://cnily.me/en/posts/lit/analysis-of-hemingway-the-good-lion/</link>
+    <pubDate>Sat, 29 Aug 2020 23:31:37 &#43;0800</pubDate><author>
+                        <name>Cnily03</name><uri>https://github.com/Cnily03</uri><email>contact@cnily.me</email></author><guid>https://cnily.me/en/posts/lit/analysis-of-hemingway-the-good-lion/</guid>
+    <description><![CDATA[海明威短篇小说《好狮子》中的好狮子是一种对文化霸权主义的高度概括，折射出其顽固虚伪的本质；好狮子的经历亦可解读为是心灵美好者在幽暗环境中被同化的过程；文章歌颂了坚贞、勇武的品格，批判了华而不实和背叛的行为，表达了对复杂环境中依然挺立的人的同情；“迷惘的一代”作为海明威的写作背景折射出文章的现实意义；文中好狮子与坏狮子的交往引起对人际交往中宽容和认同的思考；文章在思想道德层面的当代借鉴意义体现在文化霸权主义、傲慢与偏见、社会生存与交往、人性与精神等方面。]]></description>
+</item></channel>
+</rss>
